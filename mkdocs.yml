@@ -1,0 +1,10 @@
+site_name: Introdución a la Mecatrónica
+theme:
+  name: material
+nav:
+- Inicio: index.md
+- Prácticas:
+  - Práctica 1: Practicas/Practica1.md
+  - Práctica 2: Practicas/Practica 2.md
+  - Práctica 3: Practicas/Practica 3.md
+  - Práctica 4: Practicas/Practica 4.md
