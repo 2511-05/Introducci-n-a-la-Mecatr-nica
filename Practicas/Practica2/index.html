@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sesion-2-control-de-velocidad-de-un-motor-dc-con-pwm-y-555" class="md-skip">
+        <a href="#sesion-2-control-de-velocidad-de-un-motor-dc-mediante-pwm-con-esp32" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -390,38 +390,22 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fallas" class="md-nav__link">
+    <nav class="md-nav" aria-label="Desarrollo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-fuente-arduino-ide" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fallas
+        Código fuente (Arduino IDE)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#aprendizajes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Aprendizajes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#siguiente-paso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Siguiente paso
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -554,38 +538,22 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fallas" class="md-nav__link">
+    <nav class="md-nav" aria-label="Desarrollo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-fuente-arduino-ide" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fallas
+        Código fuente (Arduino IDE)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#aprendizajes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Aprendizajes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#siguiente-paso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Siguiente paso
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -606,73 +574,48 @@
 
 
 
-<h1 id="sesion-2-control-de-velocidad-de-un-motor-dc-con-pwm-y-555">Sesión 2 — Control de velocidad de un motor DC con PWM y 555</h1>
+<h1 id="sesion-2-control-de-velocidad-de-un-motor-dc-mediante-pwm-con-esp32">Sesión 2 — Control de velocidad de un motor DC mediante PWM con ESP32</h1>
 <h2 id="objetivos">Objetivos</h2>
 <ul>
-<li>Armar un circuito modulador por ancho de pulso (PWM) con 555 para controlar la velocidad de un motor DC </li>
-<li>Variar el duty cycle con un potenciómetro y medir la señal con el osciloscopio </li>
-<li>Probar el efecto de agregar/quitar el diodo de flyback (1N4007) </li>
+<li>Configurar los canales de salida PWM (LEDC) en un microcontrolador ESP32 </li>
+<li>Variar el duty cycle mediante un potenciómetro conectado a una entrada analógica (ADC) </li>
+<li>Controlar la velocidad de un motor DC a través de un transistor y diodo flyback </li>
 </ul>
 <h2 id="materiales">Materiales</h2>
 <ul>
-<li>(1×) NE555 (DIP-8)</li>
-<li>(2×) Diodos 1N4148 (para separar carga y descarga)</li>
-<li>(1×) Diodo 1N4007 (de libre circulación / flyback en el motor)</li>
-<li>(1×) Potenciómetro de 10 kΩ o 50 kΩ</li>
-<li>(1×) Resistor 1 kΩ (entre pin 7 y Vcc)</li>
-<li>(1×) Capacitor C1 = 10 nF o 100 nF (temporización)</li>
-<li>(1×) Capacitor C2 = 10 nF (pin 5 CTRL → estabilidad)</li>
+<li>(1×) Módulo ESP32 (NodeMCU 32S o similar)</li>
+<li>(1×) Potenciómetro de 10 kΩ</li>
 <li>(1×) Transistor NPN (TIP122, BD139 o 2N2222) + resistor de base (1 kΩ)</li>
-<li>(1×) Motor DC (pequeño, de aficionado / 5–9 V)</li>
-<li>Protoboard, cables, fuente de alimentación (5 V a 9 V según el motor)</li>
+<li>(1×) Diodo 1N4007 (flyback para protección del transistor)</li>
+<li>(1×) Motor DC (5 V a 9 V)</li>
+<li>(1×) Fuente de alimentación externa para el motor</li>
+<li>Protoboard, cables de conexión</li>
 </ul>
 <h2 id="desarrollo">Desarrollo</h2>
-<p><img src="../img_practica_2/555_2.jpg" alt="Circuito físico armado en protoboard." width="50%"><br />
-<em>Circuito físico armado en protoboard.</em></p>
-<p><img src="../img_practica_2/digital2.jpg" alt="Simulación en Tinkercad." width="50%"><br />
-<em>Simulación en Tinkercad.</em></p>
-<p><a href="../img_practica_2/video-555-2.mp4"><em>Video demostración del motor</em></a></p>
-<p><strong>Explicación:</strong> Con los dos diodos 1N4148 se separan los caminos de carga y descarga del capacitor a través de las dos secciones del potenciómetro. Al girar la perilla, cambia la proporción del tiempo en alto y en bajo (duty cycle) manteniendo una frecuencia casi constante, lo que ajusta la velocidad promedio del motor.</p>
-<table>
-<thead>
-<tr>
-<th>Parámetro / Condición</th>
-<th>Mínimo (girado a un extremo)</th>
-<th>Medio (aprox. 50%)</th>
-<th>Máximo (girado al otro extremo)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Duty cycle medido (%)</td>
-<td>8.87</td>
-<td>56.5</td>
-<td>98.6</td>
-</tr>
-<tr>
-<td>Frecuencia medida (Hz)</td>
-<td>1.393 k</td>
-<td>1.401 k</td>
-<td>1.398 k</td>
-</tr>
-<tr>
-<td>Estado del motor</td>
-<td>Detenido / zumbido leve</td>
-<td>Giro a velocidad media</td>
-<td>Giro a máxima velocidad</td>
-</tr>
-</tbody>
-</table>
-<h2 id="fallas">Fallas</h2>
-<ul>
-<li><strong>Síntoma:</strong> El motor no giraba al mover el potenciómetro o el transistor se calentaba rápidamente.</li>
-<li><strong>Cómo lo encontré:</strong> Revisamos la corriente con el multímetro y notamos que la señal en la base del transistor no conmutaba correctamente por un falso contacto en la protoboard.</li>
-<li><strong>Solución:</strong> Reacomodamos los cables de control de la base y aseguramos la conexión del diodo de flyback (1N4007) en paralelo con el motor para proteger el transistor de los picos de voltaje inducido.</li>
-</ul>
-<h2 id="aprendizajes">Aprendizajes</h2>
-<p>Aprendimos cómo funciona la modulación por ancho de pulso (PWM) con un circuito analógico basado en el 555. Comprobamos la importancia vital del diodo de libre circulación (flyback) al trabajar con cargas inductivas como motores, evitando daños por sobrevoltaje en el transistor.</p>
-<h2 id="siguiente-paso">Siguiente paso</h2>
-<p>Aplicar este control PWM mediante un microcontrolador o tarjeta de desarrollo para controlar la velocidad y sentido de giro de un motor de forma automatizada.</p>
+<p><img src="../img_practica_2/boton_rebote_esquema_p2.png" alt="Simulación del circuito en Wokwi o Tinkercad." width="50%"><br />
+<em>Simulación del circuito del ESP32.</em></p>
+<p><a href="../img_practica_2/video-esp32-pwm.mp4"><em>Video de demostración del control de velocidad</em></a></p>
+<p><strong>Explicación:</strong> El ESP32 lee el valor analógico del potenciómetro (de 0 a 4095) a través de uno de sus pines ADC (ej. GPIO 34). Posteriormente, escala dicho valor a la resolución configurada del canal PWM (0 a 255 para 8 bits) y envía la señal por un pin de salida (ej. GPIO 18) hacia la base del transistor, ajustando la velocidad del motor.</p>
+<h3 id="codigo-fuente-arduino-ide">Código fuente (Arduino IDE)</h3>
+<p>```cpp
+const int potPin = 34;   // Pin analógico conectado al potenciómetro
+const int pwmPin = 18;   // Pin GPIO de salida PWM</p>
+<p>// Configuración PWM del ESP32
+const int freq = 5000;      // Frecuencia en Hz
+const int pwmChannel = 0;   // Canal PWM (0 a 15)
+const int resolution = 8;   // Resolución de 8 bits (0 - 255)</p>
+<p>void setup() {
+  // Configurar las propiedades del canal PWM
+  ledcSetup(pwmChannel, freq, resolution);
+  // Asignar el canal al pin GPIO
+  ledcAttachPin(pwmPin, pwmChannel);
+}</p>
+<p>void loop() {
+  int potValue = analogRead(potPin);                     // Leer valor (0 - 4095)
+  int dutyCycle = map(potValue, 0, 4095, 0, 255);        // Escalar a 8 bits (0 - 255)</p>
+<p>ledcWrite(pwmChannel, dutyCycle);                      // Enviar señal PWM
+  delay(15);
+}</p>
 
 
 
