@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sesion-2-control-de-velocidad-de-un-motor-dc-con-pwm-y-555" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -301,6 +306,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Práctica 2
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -318,6 +343,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -404,6 +514,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -420,9 +606,73 @@
 
 
 
-  <h1>Práctica 2</h1>
-
-
+<h1 id="sesion-2-control-de-velocidad-de-un-motor-dc-con-pwm-y-555">Sesión 2 — Control de velocidad de un motor DC con PWM y 555</h1>
+<h2 id="objetivos">Objetivos</h2>
+<ul>
+<li>Armar un circuito modulador por ancho de pulso (PWM) con 555 para controlar la velocidad de un motor DC ✅</li>
+<li>Variar el duty cycle con un potenciómetro y medir la señal con el osciloscopio ✅</li>
+<li>Probar el efecto de agregar/quitar el diodo de flyback (1N4007) ✅</li>
+</ul>
+<h2 id="materiales">Materiales</h2>
+<ul>
+<li>(1×) NE555 (DIP-8)</li>
+<li>(2×) Diodos 1N4148 (para separar carga y descarga)</li>
+<li>(1×) Diodo 1N4007 (de libre circulación / flyback en el motor)</li>
+<li>(1×) Potenciómetro de 10 kΩ o 50 kΩ</li>
+<li>(1×) Resistor 1 kΩ (entre pin 7 y Vcc)</li>
+<li>(1×) Capacitor C1 = 10 nF o 100 nF (temporización)</li>
+<li>(1×) Capacitor C2 = 10 nF (pin 5 CTRL → estabilidad)</li>
+<li>(1×) Transistor NPN (TIP122, BD139 o 2N2222) + resistor de base (1 kΩ)</li>
+<li>(1×) Motor DC (pequeño, de aficionado / 5–9 V)</li>
+<li>Protoboard, cables, fuente de alimentación (5 V a 9 V según el motor)</li>
+</ul>
+<h2 id="desarrollo">Desarrollo</h2>
+<p><img src="../img_practica_2/555_2.jpg" alt="Circuito físico armado en protoboard." width="50%"><br />
+<em>Circuito físico armado en protoboard.</em></p>
+<p><img src="../img_practica_2/digital2.jpg" alt="Simulación en Tinkercad." width="50%"><br />
+<em>Simulación en Tinkercad.</em></p>
+<p><a href="../img_practica_2/video-555-2.mp4"><em>Video demostración del motor</em></a></p>
+<p><strong>Explicación:</strong> Con los dos diodos 1N4148 se separan los caminos de carga y descarga del capacitor a través de las dos secciones del potenciómetro. Al girar la perilla, cambia la proporción del tiempo en alto y en bajo (duty cycle) manteniendo una frecuencia casi constante, lo que ajusta la velocidad promedio del motor.</p>
+<table>
+<thead>
+<tr>
+<th>Parámetro / Condición</th>
+<th>Mínimo (girado a un extremo)</th>
+<th>Medio (aprox. 50%)</th>
+<th>Máximo (girado al otro extremo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duty cycle medido (%)</td>
+<td>8.87</td>
+<td>56.5</td>
+<td>98.6</td>
+</tr>
+<tr>
+<td>Frecuencia medida (Hz)</td>
+<td>1.393 k</td>
+<td>1.401 k</td>
+<td>1.398 k</td>
+</tr>
+<tr>
+<td>Estado del motor</td>
+<td>Detenido / zumbido leve</td>
+<td>Giro a velocidad media</td>
+<td>Giro a máxima velocidad</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fallas">Fallas</h2>
+<ul>
+<li><strong>Síntoma:</strong> El motor no giraba al mover el potenciómetro o el transistor se calentaba rápidamente.</li>
+<li><strong>Cómo lo encontré:</strong> Revisamos la corriente con el multímetro y notamos que la señal en la base del transistor no conmutaba correctamente por un falso contacto en la protoboard.</li>
+<li><strong>Solución:</strong> Reacomodamos los cables de control de la base y aseguramos la conexión del diodo de flyback (1N4007) en paralelo con el motor para proteger el transistor de los picos de voltaje inducido.</li>
+</ul>
+<h2 id="aprendizajes">Aprendizajes</h2>
+<p>Aprendimos cómo funciona la modulación por ancho de pulso (PWM) con un circuito analógico basado en el 555. Comprobamos la importancia vital del diodo de libre circulación (flyback) al trabajar con cargas inductivas como motores, evitando daños por sobrevoltaje en el transistor.</p>
+<h2 id="siguiente-paso">Siguiente paso</h2>
+<p>Aplicar este control PWM mediante un microcontrolador o tarjeta de desarrollo para controlar la velocidad y sentido de giro de un motor de forma automatizada.</p>
 
 
 

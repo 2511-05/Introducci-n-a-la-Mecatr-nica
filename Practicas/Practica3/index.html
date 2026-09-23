@@ -63,6 +63,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sesion-3-puente-h-y-control-de-sentido-de-giro-de-un-motor-dc" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -329,6 +334,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Práctica 3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -346,6 +371,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -404,6 +514,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -420,9 +606,82 @@
 
 
 
-  <h1>Práctica 3</h1>
-
-
+<h1 id="sesion-3-puente-h-y-control-de-sentido-de-giro-de-un-motor-dc">Sesión 3 — Puente H y control de sentido de giro de un motor DC</h1>
+<h2 id="objetivos">Objetivos</h2>
+<ul>
+<li>Armar un circuito en Puente H (mediante CI L293D / SN754410 o transistores) para controlar el sentido de giro de un motor DC </li>
+<li>Integrar el control de velocidad por PWM previo con la inversión de giro </li>
+<li>Comprobar la lógica de entradas de control y la protección contra cortocircuitos </li>
+</ul>
+<h2 id="materiales">Materiales</h2>
+<ul>
+<li>(1×) Driver Puente H (L293D o SN754410)</li>
+<li>(1×) NE555 (DIP-8) para señal PWM</li>
+<li>(1×) Motor DC (5 V a 9 V)</li>
+<li>(2×) Pulsadores o interruptores (push buttons)</li>
+<li>(1×) Potenciómetro de 10 kΩ (para velocidad PWM)</li>
+<li>(1×) Fuente de alimentación (5 V / 9 V)</li>
+<li>Protoboard, cables de conexión, resistores varios</li>
+</ul>
+<h2 id="desarrollo">Desarrollo</h2>
+<p><img src="../img_practica_3/puente_h.jpg" alt="Circuito armado en físico con Puente H y motor DC." width="50%"><br />
+<em>Circuito armado en físico con Puente H y motor DC.</em></p>
+<p><img src="../img_practica_3/digital3.jpg" alt="Simulación del circuito en Tinkercad." width="50%"><br />
+<em>Simulación del circuito en Tinkercad.</em></p>
+<p><a href="../img_practica_3/video-puente-h.mp4"><em>Video demostración del cambio de giro y velocidad</em></a></p>
+<p><strong>Explicación:</strong> El puente H permite cambiar la polaridad aplicada a las terminales del motor. Al activar la primera combinación de entradas, la corriente fluye en una dirección (giro a la derecha); al cambiar la combinación, la corriente fluye en sentido opuesto (giro a la izquierda). La señal PWM proveniente del 555 se conecta al pin <em>Enable</em> para controlar simultáneamente la velocidad.</p>
+<table>
+<thead>
+<tr>
+<th>Entrada 1 (IN1)</th>
+<th>Entrada 2 (IN2)</th>
+<th>Pin Enable (PWM)</th>
+<th>Estado del motor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alto (5V)</td>
+<td>Bajo (0V)</td>
+<td>100% Duty</td>
+<td>Giro a la derecha (máxima velocidad)</td>
+</tr>
+<tr>
+<td>Bajo (0V)</td>
+<td>Alto (5V)</td>
+<td>100% Duty</td>
+<td>Giro a la izquierda (máxima velocidad)</td>
+</tr>
+<tr>
+<td>Alto (5V)</td>
+<td>Bajo (0V)</td>
+<td>50% Duty</td>
+<td>Giro a la derecha (velocidad media)</td>
+</tr>
+<tr>
+<td>Bajo (0V)</td>
+<td>Bajo (0V)</td>
+<td>Cualquier valor</td>
+<td>Detenido (freno pasivo)</td>
+</tr>
+<tr>
+<td>Alto (5V)</td>
+<td>Alto (5V)</td>
+<td>Cualquier valor</td>
+<td>Detenido (freno activo)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fallas">Fallas</h2>
+<ul>
+<li><strong>Síntoma:</strong> El integrado L293D se calentaba demasiado o el motor no giraba en una de las direcciones.</li>
+<li><strong>Cómo lo encontré:</strong> Medimos los voltajes en los pines de entrada (IN1 e IN2) con el multímetro y descubrimos que ambas entradas estaban recibiendo señal alta al mismo tiempo por un mal cableado de los botones.</li>
+<li><strong>Solución:</strong> Corregimos las conexiones de los pulsadores añadiendo resistores de <em>pull-down</em> (10 kΩ) a tierra para asegurar estados lógicos definidos en cero (0V) cuando los botones no estén presionados.</li>
+</ul>
+<h2 id="aprendizajes">Aprendizajes</h2>
+<p>Comprendimos la estructura interna y el funcionamiento del Puente H como etapa de potencia entre las señales de control de bajo voltaje y la carga inductiva del motor. Aprendimos a integrar el control de sentido de giro con el módulo de velocidad PWM sin causar cortocircuitos en la etapa de potencia.</p>
+<h2 id="siguiente-paso">Siguiente paso</h2>
+<p>Integrar estos conceptos analógicos y de potencia en una tarjeta programable (como Arduino) para automatizar los movimientos del motor mediante código.</p>
 
 
 
