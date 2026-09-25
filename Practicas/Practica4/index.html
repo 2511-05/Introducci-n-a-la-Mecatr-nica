@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sesion-4-lectura-de-sensores-ldr-ultrasonico-y-potenciometro-con-esp32" class="md-skip">
+        <a href="#sesion-4-lectura-e-interfaz-de-sensores-con-esp32" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -444,6 +444,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Desarrollo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parte-1-lectura-de-potenciometro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 1: Lectura de Potenciómetro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2-sensor-de-luz-ldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2: Sensor de Luz (LDR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-3-sensor-ultrasonico-hc-sr04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 3: Sensor Ultrasónico (HC-SR04)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -552,6 +591,45 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Desarrollo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parte-1-lectura-de-potenciometro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 1: Lectura de Potenciómetro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2-sensor-de-luz-ldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2: Sensor de Luz (LDR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-3-sensor-ultrasonico-hc-sr04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 3: Sensor Ultrasónico (HC-SR04)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -604,72 +682,92 @@
 
 
 
-<h1 id="sesion-4-lectura-de-sensores-ldr-ultrasonico-y-potenciometro-con-esp32">Sesión 4 — Lectura de sensores (LDR, Ultrasónico y Potenciómetro) con ESP32</h1>
+<h1 id="sesion-4-lectura-e-interfaz-de-sensores-con-esp32">Sesión 4 — Lectura e interfaz de sensores con ESP32</h1>
 <h2 id="objetivos">Objetivos</h2>
 <ul>
-<li>Configurar e integrar múltiples sensores (analógicos y digitales) en el ESP32 </li>
-<li>Realizar lecturas analógicas (ADC) de un potenciómetro y un sensor de luz (LDR) </li>
-<li>Medir distancias en centímetros utilizando un sensor ultrasónico HC-SR04 </li>
-<li>Procesar y mostrar los datos en tiempo real mediante el Monitor Serie </li>
+<li>Configurar entradas analógicas y digitales en el ESP32 para distintos tipos de sensores </li>
+<li>Realizar la lectura de un potenciómetro para entender la conversión ADC </li>
+<li>Medir la variación de iluminación mediante una fotorresistencia (LDR) </li>
+<li>Medir la distancia en centímetros utilizando un sensor ultrasónico HC-SR04 </li>
 </ul>
 <h2 id="materiales">Materiales</h2>
 <ul>
 <li>(1×) Módulo ESP32 (NodeMCU 32S o similar)</li>
-<li>(1×) Sensor Ultrasónico HC-SR04 (Trig / Echo)</li>
-<li>(1×) Fotorresistencia LDR (Sensor de luz) + resistor 10 kΩ (divisora de voltaje)</li>
+<li>(1×) Sensor Ultrasónico HC-SR04</li>
+<li>(1×) Fotorresistencia LDR + resistor 10 kΩ</li>
 <li>(1×) Potenciómetro de 10 kΩ</li>
-<li>Protoboard, cables de conexión de distintos colores</li>
-<li>Cable de datos USB para conexión al equipo</li>
+<li>Protoboard, cables de conexión</li>
+<li>Cable USB para programación</li>
 </ul>
 <h2 id="desarrollo">Desarrollo</h2>
-<p><img src="../img_practica_4/esp32_sensores.jpg" alt="Circuito físico con ESP32, potenciómetro, LDR y sensor ultrasónico." width="50%"><br />
-<em>Circuito armado en físico con el ESP32, potenciómetro, LDR y sensor ultrasónico en protoboard.</em></p>
-<p><img src="../img_practica_4/digital4.jpg" alt="Simulación del circuito con sensores en Wokwi o Tinkercad." width="50%"><br />
-<em>Simulación del circuito en plataforma digital.</em></p>
-<p><img src="../img_practica_4/codigo_practica4.jpg" alt="Código fuente del programa en Arduino IDE." width="50%"><br />
-<em>Código fuente implementado en Arduino IDE para la lectura de sensores.</em></p>
-<p><a href="../img_practica_4/video-sensores-esp32.mp4"><em>Video de demostración de lectura de sensores en tiempo real</em></a></p>
-<p><strong>Explicación:</strong> El ESP32 realiza tres tipos de lectura: las entradas analógicas (ADC) procesan la señal del potenciómetro y de la fotorresistencia LDR (convertidas de 0 a 4095). Por otro lado, mediante el sensor ultrasónico HC-SR04 se envía un pulso de 10 µs a través del pin <em>Trig</em> y se mide el tiempo de retorno de la onda reflejada mediante el pin <em>Echo</em>, calculando así la distancia en centímetros.</p>
+<h3 id="parte-1-lectura-de-potenciometro">Parte 1: Lectura de Potenciómetro</h3>
+<p><img src="../img_practica_4/potenciometro_fisico.jpg" alt="Circuito del potenciómetro en protoboard." width="50%"><br />
+<em>Circuito del potenciómetro conectado al ESP32.</em></p>
+<p><img src="../img_practica_4/potenciometro_simulacion.jpg" alt="Simulación del potenciómetro." width="50%"><br />
+<em>Simulación de la lectura del potenciómetro.</em></p>
+<p><img src="../img_practica_4/potenciometro_codigo.jpg" alt="Código para el potenciómetro." width="50%"><br />
+<em>Código fuente implementado para el potenciómetro.</em></p>
+<p><strong>Explicación:</strong> Se conectó el potenciómetro a una entrada analógica (ADC) del ESP32. Al girar la perilla, el voltaje varía entre 0V y 3.3V, lo que el ESP32 convierte internamente en un rango numérico de 0 a 4095 que se imprime en el Monitor Serie.</p>
+<hr />
+<h3 id="parte-2-sensor-de-luz-ldr">Parte 2: Sensor de Luz (LDR)</h3>
+<p><img src="../img_practica_4/ldr_fisico.jpg" alt="Circuito de la fotorresistencia LDR." width="50%"><br />
+<em>Circuito de la fotorresistencia LDR en protoboard.</em></p>
+<p><img src="../img_practica_4/ldr_simulacion.jpg" alt="Simulación de la LDR." width="50%"><br />
+<em>Simulación de la lectura de luz con LDR.</em></p>
+<p><img src="../img_practica_4/ldr_codigo.jpg" alt="Código para la LDR." width="50%"><br />
+<em>Código fuente implementado para la fotorresistencia LDR.</em></p>
+<p><strong>Explicación:</strong> La LDR cambia su resistencia según la cantidad de luz ambiental. En conjunto con una resistencia fija de 10 kΩ formando un divisor de voltaje, el ESP32 lee la variación de voltaje en su pin analógico: a mayor luz disponible, mayor es el valor devuelto por el ADC.</p>
+<hr />
+<h3 id="parte-3-sensor-ultrasonico-hc-sr04">Parte 3: Sensor Ultrasónico (HC-SR04)</h3>
+<p><img src="../img_practica_4/ultrasonico_fisico.jpg" alt="Circuito del sensor ultrasónico." width="50%"><br />
+<em>Circuito del sensor ultrasónico conectado al ESP32.</em></p>
+<p><img src="../img_practica_4/ultrasonico_simulacion.jpg" alt="Simulación del sensor ultrasónico." width="50%"><br />
+<em>Simulación de la medición de distancia.</em></p>
+<p><img src="../img_practica_4/ultrasonico_codigo.jpg" alt="Código para el sensor ultrasónico." width="50%"><br />
+<em>Código fuente implementado para el sensor ultrasónico.</em></p>
+<p><a href="../img_practica_4/video-sensores-esp32.mp4"><em>Video de demostración de los sensores</em></a></p>
+<p><strong>Explicación:</strong> Mediante el pin <em>Trig</em> se emite un pulso ultrasónico de alta frecuencia de 10 µs. Al chocar contra un objeto, el rebote regresa al pin <em>Echo</em>. El ESP32 mide el tiempo transcurrido con la función <code>pulseIn()</code> y calcula la distancia aplicando la fórmula de la velocidad del sonido.</p>
+<hr />
 <table>
 <thead>
 <tr>
 <th>Sensor / Componente</th>
-<th>Condición de prueba</th>
-<th>Lectura ADC / Salida</th>
-<th>Interpretación</th>
+<th>Lectura en condición mínima</th>
+<th>Lectura en condición máxima</th>
+<th>Aplicación práctica</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Potenciómetro</strong></td>
-<td>Extremo Mínimo / Extremo Máximo</td>
-<td>0 / 4095</td>
-<td>Rango completo de 0 a 3.3V</td>
+<td>0 (0 V)</td>
+<td>4095 (3.3 V)</td>
+<td>Control manual de parámetros</td>
 </tr>
 <tr>
 <td><strong>LDR (Luz)</strong></td>
-<td>Luz ambiental / Sensor cubierto</td>
-<td>~3000 / ~400</td>
-<td>Disminución de lectura analógica por falta de luz</td>
+<td>~400 (Oscuridad)</td>
+<td>~3500 (Mucha luz)</td>
+<td>Detección de iluminación / Noche</td>
 </tr>
 <tr>
 <td><strong>Ultrasónico</strong></td>
-<td>Objeto cercano / Objeto lejano</td>
-<td>5.2 cm / 45.0 cm</td>
-<td>Cálculo preciso en cm basado en el tiempo de vuelo del sonido</td>
+<td>~2.0 cm</td>
+<td>~200.0 cm</td>
+<td>Detección de obstáculos y distancia</td>
 </tr>
 </tbody>
 </table>
 <h2 id="fallas">Fallas</h2>
 <ul>
-<li><strong>Síntoma:</strong> El sensor ultrasónico devolvía valores fijados en 0 cm o mediciones erráticas y saltos abruptos.</li>
-<li><strong>Cómo lo encontré:</strong> Al abrir el Monitor Serie observamos que las mediciones de distancia no cambiaban ni al acercar la mano. Comprobamos con el multímetro los pines de alimentación.</li>
-<li><strong>Solución:</strong> Descubrimos que el sensor HC-SR04 requiere una alimentación de 5V para funcionar con precisión, mientras que lo teníamos conectado a la salida de 3.3V del ESP32. Al conectarlo al pin <code>VIN</code> (5V de la fuente/USB), el sensor comenzó a medir correctamente.</li>
+<li><strong>Síntoma:</strong> El sensor ultrasónico no medía nada o arrojaba 0 cm constantes en el Monitor Serie.</li>
+<li><strong>Cómo lo encontré:</strong> Comprobamos que todo estuviera conectado a los pines correctos.</li>
+<li><strong>Solución:</strong> Corregimos la conexión en el simulador ya que habiamos cometido un error al conectar al pin de 3.3V de la ESP32.</li>
 </ul>
 <h2 id="aprendizajes">Aprendizajes</h2>
-<p>Comprendimos la diferencia práctica entre sensores con salidas analógicas continuas (LDR y potenciómetro) y sensores que requieren medición de pulsos de tiempo (ultrasónico HC-SR04). Además, aprendimos a manipular adecuadamente las librerías o fórmulas matemáticas para convertir unidades de tiempo en distancia (cm) y a interpretar múltiples entradas en simultáneo a través del Monitor Serie.</p>
+<p>Aprendimos a implementar e interpretar sensores de manera independiente. Comprendimos el funcionamiento de las entradas analógicas (ADC de 12 bits) para el potenciómetro y la LDR, y el manejo de temporización digital precisa mediante pulsos para medir distancia con el sensor ultrasónico.</p>
 <h2 id="siguiente-paso">Siguiente paso</h2>
-<p>Implementar condiciones lógicas que activen actuadores (como encender un zumbador/buzzer o un LED de advertencia) cuando la distancia detectada sea menor a un umbral específico o cuando la luz ambiental descienda.</p>
+<p>Combinar las lecturas individuales de estos sensores en un solo programa para tomar decisiones de control complejas (por ejemplo, encender un motor o activar una alarma cuando un objeto esté cerca o haya poca luz).</p>
 
 
 
