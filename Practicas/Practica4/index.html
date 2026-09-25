@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sesion-4-lectura-de-sensores-ldr-ultrasonico-y-potenciometro-con-esp32" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -355,6 +360,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Práctica 4
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -372,6 +397,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -402,6 +512,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -418,9 +604,72 @@
 
 
 
-  <h1>Práctica 4</h1>
-
-
+<h1 id="sesion-4-lectura-de-sensores-ldr-ultrasonico-y-potenciometro-con-esp32">Sesión 4 — Lectura de sensores (LDR, Ultrasónico y Potenciómetro) con ESP32</h1>
+<h2 id="objetivos">Objetivos</h2>
+<ul>
+<li>Configurar e integrar múltiples sensores (analógicos y digitales) en el ESP32 </li>
+<li>Realizar lecturas analógicas (ADC) de un potenciómetro y un sensor de luz (LDR) </li>
+<li>Medir distancias en centímetros utilizando un sensor ultrasónico HC-SR04 </li>
+<li>Procesar y mostrar los datos en tiempo real mediante el Monitor Serie </li>
+</ul>
+<h2 id="materiales">Materiales</h2>
+<ul>
+<li>(1×) Módulo ESP32 (NodeMCU 32S o similar)</li>
+<li>(1×) Sensor Ultrasónico HC-SR04 (Trig / Echo)</li>
+<li>(1×) Fotorresistencia LDR (Sensor de luz) + resistor 10 kΩ (divisora de voltaje)</li>
+<li>(1×) Potenciómetro de 10 kΩ</li>
+<li>Protoboard, cables de conexión de distintos colores</li>
+<li>Cable de datos USB para conexión al equipo</li>
+</ul>
+<h2 id="desarrollo">Desarrollo</h2>
+<p><img src="../img_practica_4/esp32_sensores.jpg" alt="Circuito físico con ESP32, potenciómetro, LDR y sensor ultrasónico." width="50%"><br />
+<em>Circuito armado en físico con el ESP32, potenciómetro, LDR y sensor ultrasónico en protoboard.</em></p>
+<p><img src="../img_practica_4/digital4.jpg" alt="Simulación del circuito con sensores en Wokwi o Tinkercad." width="50%"><br />
+<em>Simulación del circuito en plataforma digital.</em></p>
+<p><img src="../img_practica_4/codigo_practica4.jpg" alt="Código fuente del programa en Arduino IDE." width="50%"><br />
+<em>Código fuente implementado en Arduino IDE para la lectura de sensores.</em></p>
+<p><a href="../img_practica_4/video-sensores-esp32.mp4"><em>Video de demostración de lectura de sensores en tiempo real</em></a></p>
+<p><strong>Explicación:</strong> El ESP32 realiza tres tipos de lectura: las entradas analógicas (ADC) procesan la señal del potenciómetro y de la fotorresistencia LDR (convertidas de 0 a 4095). Por otro lado, mediante el sensor ultrasónico HC-SR04 se envía un pulso de 10 µs a través del pin <em>Trig</em> y se mide el tiempo de retorno de la onda reflejada mediante el pin <em>Echo</em>, calculando así la distancia en centímetros.</p>
+<table>
+<thead>
+<tr>
+<th>Sensor / Componente</th>
+<th>Condición de prueba</th>
+<th>Lectura ADC / Salida</th>
+<th>Interpretación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Potenciómetro</strong></td>
+<td>Extremo Mínimo / Extremo Máximo</td>
+<td>0 / 4095</td>
+<td>Rango completo de 0 a 3.3V</td>
+</tr>
+<tr>
+<td><strong>LDR (Luz)</strong></td>
+<td>Luz ambiental / Sensor cubierto</td>
+<td>~3000 / ~400</td>
+<td>Disminución de lectura analógica por falta de luz</td>
+</tr>
+<tr>
+<td><strong>Ultrasónico</strong></td>
+<td>Objeto cercano / Objeto lejano</td>
+<td>5.2 cm / 45.0 cm</td>
+<td>Cálculo preciso en cm basado en el tiempo de vuelo del sonido</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fallas">Fallas</h2>
+<ul>
+<li><strong>Síntoma:</strong> El sensor ultrasónico devolvía valores fijados en 0 cm o mediciones erráticas y saltos abruptos.</li>
+<li><strong>Cómo lo encontré:</strong> Al abrir el Monitor Serie observamos que las mediciones de distancia no cambiaban ni al acercar la mano. Comprobamos con el multímetro los pines de alimentación.</li>
+<li><strong>Solución:</strong> Descubrimos que el sensor HC-SR04 requiere una alimentación de 5V para funcionar con precisión, mientras que lo teníamos conectado a la salida de 3.3V del ESP32. Al conectarlo al pin <code>VIN</code> (5V de la fuente/USB), el sensor comenzó a medir correctamente.</li>
+</ul>
+<h2 id="aprendizajes">Aprendizajes</h2>
+<p>Comprendimos la diferencia práctica entre sensores con salidas analógicas continuas (LDR y potenciómetro) y sensores que requieren medición de pulsos de tiempo (ultrasónico HC-SR04). Además, aprendimos a manipular adecuadamente las librerías o fórmulas matemáticas para convertir unidades de tiempo en distancia (cm) y a interpretar múltiples entradas en simultáneo a través del Monitor Serie.</p>
+<h2 id="siguiente-paso">Siguiente paso</h2>
+<p>Implementar condiciones lógicas que activen actuadores (como encender un zumbador/buzzer o un LED de advertencia) cuando la distancia detectada sea menor a un umbral específico o cuando la luz ambiental descienda.</p>
 
 
 
