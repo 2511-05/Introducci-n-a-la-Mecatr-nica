@@ -1,17 +1,13 @@
-# Welcome to MkDocs
+# Introducción a la Mecatrónica
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Bienvenido al repositorio de prácticas del curso. Aquí encontrarás el reporte y desarrollo de cada una de nuestras sesiones laboratorio.
+Integrantes:
+- Diana Arellano Mendoza
+- Andrea Vera Fuentes
 
-## Commands
+## Contenido
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+* **Práctica 1:** Sesión 1
+* **Práctica 2:** Práctica 2
+* **Práctica 3:** Práctica 3
+* **Práctica 4:** Práctica 4
