@@ -134,18 +134,3 @@ void loop() {
 * **Potenciómetro:** Presenta una respuesta lineal y muy estable, ideal para ajustes de calibración o control directo de variables por parte del usuario.
 * **LDR:** Muestra una respuesta no lineal pero altamente sensible a variaciones de luz ambiental, requiriendo umbrales de software para aplicaciones tipo encendido/apagado.
 * **HC-SR04:** Proporciona mediciones precisas de distancia en un rango de $2\text{ cm}$ a $400\text{ cm}$, requiriendo filtrado por software en caso de detectar ecos falsos o rebotes en ángulos inclinados.
-
-```
-
----
-
-### Recordatorio para subir tus cambios:
-Una vez que pegues este código dentro de tu archivo `docs/Practicas/Practica4.md`, guarda los cambios (`Ctrl + S`) y ejecuta en la terminal:
-
-```bash
-git add .
-git commit -m "Actualizada Practica 4 con rutas de imagenes relativas"
-git push origin main
-mkdocs gh-deploy --force
-
-```
