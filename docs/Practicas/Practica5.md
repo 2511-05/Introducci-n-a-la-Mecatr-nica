@@ -139,8 +139,12 @@ void loop() {
 
 ---
 
+## Aprendizaje
+
+Comprendimos cómo la etapa de salida del ESP32 interactúa con dispositivos que requieren mayor potencia o precisión de movimiento. Aprendimos a estructurar secuencias lógicas de control mediante software y a garantizar la protección eléctrica del microcontrolador.
+
+--- 
+
 ## Siguiente Paso
 
-Una vez dominado el manejo de entradas analógicas (Práctica 4) y la activación de actuadores con etapas de potencia (Práctica 5), el siguiente módulo integra ambos conceptos en bucle cerrado:
-
-* **[Práctica 6: Integración de Sensores y Actuadores en Sistemas Mecatrónicos](https://www.google.com/search?q=../Practica6/)** — Implementación de un sistema de control realimentado donde las lecturas de los sensores modulan directamente la posición y velocidad de los motores.
+Integrar en un solo sistema los sensores leídos en prácticas anteriores (como el ultrasónico o LDR) para activar de forma automática y autónoma estos actuadores según el entorno.
