@@ -11,3 +11,5 @@ Integrantes:
 * **Práctica 2:** Práctica 2
 * **Práctica 3:** Práctica 3
 * **Práctica 4:** Práctica 4
+* **Práctica 5:** Práctica 5
+* **Práctica 6:** Práctica 6

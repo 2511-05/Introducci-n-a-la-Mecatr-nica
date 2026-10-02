@@ -9,8 +9,6 @@
       
       
       
-        <link rel="prev" href="../Practica3/">
-      
       
       
         
@@ -21,7 +19,7 @@
     
     
       
-        <title>Práctica 4 - Introdución a la Mecatrónica</title>
+        <title>Sesión 5 — Control e integración de actuadores con ESP32 - Introdución a la Mecatrónica</title>
       
     
     
@@ -62,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sesion-4-lectura-e-interfaz-de-sensores-con-esp32" class="md-skip">
+        <a href="#sesion-5-control-e-integracion-de-actuadores-con-esp32" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -98,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Práctica 4
+              Sesión 5 — Control e integración de actuadores con ESP32
             
           </span>
         </div>
@@ -218,20 +216,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -252,7 +248,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -351,37 +347,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Práctica 4
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../Practica4/" class="md-nav__link">
         
   
   
@@ -397,131 +366,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objetivos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Objetivos
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#materiales" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Materiales
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#desarrollo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Desarrollo
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Desarrollo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parte-1-lectura-de-potenciometro" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parte 1: Lectura de Potenciómetro
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parte-2-sensor-de-luz-ldr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parte 2: Sensor de Luz (LDR)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parte-3-sensor-ultrasonico-hc-sr04" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parte 3: Sensor Ultrasónico (HC-SR04)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fallas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fallas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#aprendizajes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Aprendizajes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#siguiente-paso" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Siguiente paso
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -591,45 +435,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Desarrollo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#parte-1-lectura-de-potenciometro" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parte 1: Lectura de Potenciómetro
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parte-2-sensor-de-luz-ldr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parte 2: Sensor de Luz (LDR)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#parte-3-sensor-ultrasonico-hc-sr04" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parte 3: Sensor Ultrasónico (HC-SR04)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -682,90 +487,66 @@
 
 
 
-<h1 id="sesion-4-lectura-e-interfaz-de-sensores-con-esp32">Sesión 4 — Lectura e interfaz de sensores con ESP32</h1>
+<h1 id="sesion-5-control-e-integracion-de-actuadores-con-esp32">Sesión 5 — Control e integración de actuadores con ESP32</h1>
 <h2 id="objetivos">Objetivos</h2>
 <ul>
-<li>Configurar entradas analógicas y digitales en el ESP32 para distintos tipos de sensores </li>
-<li>Realizar la lectura de un potenciómetro para entender la conversión ADC </li>
-<li>Medir la variación de iluminación mediante una fotorresistencia (LDR) </li>
-<li>Medir la distancia en centímetros utilizando un sensor ultrasónico HC-SR04 </li>
+<li>Integrar el control de múltiples actuadores (servomotores, motores DC o displays) mediante el ESP32 </li>
+<li>Implementar comunicación y control mediante señales de salida (PWM / Digitales) </li>
+<li>Desarrollar lógica de programación para automatizar la secuencia de activación de los componentes </li>
 </ul>
 <h2 id="materiales">Materiales</h2>
 <ul>
 <li>(1×) Módulo ESP32 (NodeMCU 32S o similar)</li>
-<li>(1×) Sensor Ultrasónico HC-SR04</li>
-<li>(1×) Fotorresistencia LDR + resistor 10 kΩ</li>
-<li>(1×) Potenciómetro de 10 kΩ</li>
-<li>Protoboard, cables de conexión</li>
-<li>Cable USB para programación</li>
+<li>(1×) Servomotor (SG90 o MG90S) / Motor DC</li>
+<li>(1×) Driver de potencia o módulo de control (Puente H L298N/L293D o Transistor)</li>
+<li>(1×) Fuente de alimentación externa (5V)</li>
+<li>Protoboard y cables de conexión</li>
 </ul>
 <h2 id="desarrollo">Desarrollo</h2>
-<h3 id="parte-1-lectura-de-potenciometro">Parte 1: Lectura de Potenciómetro</h3>
-<p><img src="-" width="50%"><br />
-<em>Circuito del potenciómetro conectado al ESP32.</em></p>
-<p><img src="-" width="50%"><br />
-<em>Código fuente implementado para el potenciómetro.</em></p>
-<p><strong>Explicación:</strong> Se conectó el potenciómetro a una entrada analógica (ADC) del ESP32. Al girar la perilla, el voltaje varía entre 0V y 3.3V, lo que el ESP32 convierte internamente en un rango numérico de 0 a 4095 que se imprime en el Monitor Serie.</p>
-<hr />
-<h3 id="parte-2-sensor-de-luz-ldr">Parte 2: Sensor de Luz (LDR)</h3>
-<p><img src="-" alt="Circuito de la fotorresistencia LDR." width="50%"><br />
-<em>Circuito de la fotorresistencia LDR en protoboard.</em></p>
-<p><img src="-" alt="Simulación de la LDR." width="50%"><br />
-<em>Simulación de la lectura de luz con LDR.</em></p>
-<p><img src="-" alt="Código para la LDR." width="50%"><br />
-<em>Código fuente implementado para la fotorresistencia LDR.</em></p>
-<p><strong>Explicación:</strong> La LDR cambia su resistencia según la cantidad de luz ambiental. En conjunto con una resistencia fija de 10 kΩ formando un divisor de voltaje, el ESP32 lee la variación de voltaje en su pin analógico: a mayor luz disponible, mayor es el valor devuelto por el ADC.</p>
-<hr />
-<h3 id="parte-3-sensor-ultrasonico-hc-sr04">Parte 3: Sensor Ultrasónico (HC-SR04)</h3>
-<p><img src="-" alt="Circuito del sensor ultrasónico." width="50%"><br />
-<em>Circuito del sensor ultrasónico conectado al ESP32.</em></p>
-<p><img src="-" alt="Simulación del sensor ultrasónico." width="50%"><br />
-<em>Simulación de la medición de distancia.</em></p>
-<p><img src="-" alt="Código para el sensor ultrasónico." width="50%"><br />
-<em>Código fuente implementado para el sensor ultrasónico.</em></p>
-<p><a href="../img_practica_4/video-sensores-esp32.mp4"><em>Video de demostración de los sensores</em></a></p>
-<p><strong>Explicación:</strong> Mediante el pin <em>Trig</em> se emite un pulso ultrasónico de alta frecuencia de 10 µs. Al chocar contra un objeto, el rebote regresa al pin <em>Echo</em>. El ESP32 mide el tiempo transcurrido con la función <code>pulseIn()</code> y calcula la distancia aplicando la fórmula de la velocidad del sonido.</p>
-<hr />
+<p><img src="-" alt="Circuito físico de la Práctica 5 en protoboard." width="50%"><br />
+<em>Circuito armado en físico sobre la protoboard con el ESP32 y actuadores.</em></p>
+<p><img src="-" alt="Simulación digital del circuito." width="50%"><br />
+<em>Simulación del circuito en plataforma digital.</em></p>
+<p><img src="-" alt="Captura del código fuente en Arduino IDE." width="50%"><br />
+<em>Código fuente implementado en Arduino IDE.</em></p>
+<p><a href="../img_practica_5/video-practica5.mp4"><em>Video de demostración del funcionamiento</em></a></p>
+<p><strong>Explicación:</strong> En esta práctica se configuró el ESP32 para controlar la respuesta de un sistema físico mediante señales de salida. Se emplearon canales de control PWM / digital para manipular la posición o velocidad del actuador en función de la lógica definida en el código de Arduino IDE, asegurando una etapa de potencia aislada para evitar sobrecargas en la tarjeta de desarrollo.</p>
 <table>
 <thead>
 <tr>
-<th>Sensor / Componente</th>
-<th>Lectura en condición mínima</th>
-<th>Lectura en condición máxima</th>
-<th>Aplicación práctica</th>
+<th>Estado / Entrada</th>
+<th>Señal de salida (ESP32)</th>
+<th>Respuesta del actuador</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Potenciómetro</strong></td>
-<td>0 (0 V)</td>
-<td>4095 (3.3 V)</td>
-<td>Control manual de parámetros</td>
+<td>Estado Inicial / Reposo</td>
+<td>0% Duty / 0V</td>
+<td>Desactivado / Posición 0°</td>
 </tr>
 <tr>
-<td><strong>LDR (Luz)</strong></td>
-<td>~400 (Oscuridad)</td>
-<td>~3500 (Mucha luz)</td>
-<td>Detección de iluminación / Noche</td>
+<td>Estado Intermedio</td>
+<td>50% Duty / Señal modulada</td>
+<td>Actividad a media potencia / Posición 90°</td>
 </tr>
 <tr>
-<td><strong>Ultrasónico</strong></td>
-<td>~2.0 cm</td>
-<td>~200.0 cm</td>
-<td>Detección de obstáculos y distancia</td>
+<td>Estado Máximo</td>
+<td>100% Duty / 3.3V</td>
+<td>Máxima potencia / Posición 180°</td>
 </tr>
 </tbody>
 </table>
 <h2 id="fallas">Fallas</h2>
 <ul>
-<li><strong>Síntoma:</strong> El sensor ultrasónico no medía nada o arrojaba 0 cm constantes en el Monitor Serie.</li>
-<li><strong>Cómo lo encontré:</strong> Comprobamos que todo estuviera conectado a los pines correctos.</li>
-<li><strong>Solución:</strong> Corregimos la conexión en el simulador ya que habiamos cometido un error al conectar al pin de 3.3V de la ESP32.</li>
+<li><strong>Síntoma:</strong> El actuador no respondía o el ESP32 presentaba reinicios inesperados al activar el componente.</li>
+<li><strong>Cómo lo encontré:</strong> Observamos caída de voltaje en la línea principal al intentar arrancar el actuador y revisamos las conexiones con el multímetro.</li>
+<li><strong>Solución:</strong> Separamos la línea de alimentación del actuador conectándolo a una fuente externa de 5V y unificando únicamente las tierras (GND) con el ESP32.</li>
 </ul>
 <h2 id="aprendizajes">Aprendizajes</h2>
-<p>Aprendimos a implementar e interpretar sensores de manera independiente. Comprendimos el funcionamiento de las entradas analógicas (ADC de 12 bits) para el potenciómetro y la LDR, y el manejo de temporización digital precisa mediante pulsos para medir distancia con el sensor ultrasónico.</p>
+<p>Comprendimos cómo la etapa de salida del ESP32 interactúa con dispositivos que requieren mayor potencia o precisión de movimiento. Aprendimos a estructurar secuencias lógicas de control mediante software y a garantizar la protección eléctrica del microcontrolador.</p>
 <h2 id="siguiente-paso">Siguiente paso</h2>
-<p>Combinar las lecturas individuales de estos sensores en un solo programa para tomar decisiones de control complejas (por ejemplo, encender un motor o activar una alarma cuando un objeto esté cerca o haya poca luz).</p>
+<p>Integrar en un solo sistema los sensores leídos en prácticas anteriores (como el ultrasónico o LDR) para activar de forma automática y autónoma estos actuadores según el entorno.</p>
 
 
 
