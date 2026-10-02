@@ -1,75 +1,151 @@
-# Sesión 4 — Lectura e interfaz de sensores con ESP32
+Aquí tienes el código **Markdown completo** para la **Práctica 4**, conservando todo el texto detallado de la práctica y utilizando la sintaxis nativa de imágenes `![Texto](../Ruta/imagen.ext)`:
+
+```markdown
+# Práctica 4 — Sensores Analógicos Individuales
 
 ## Objetivos
-* Configurar entradas analógicas y digitales en el ESP32 para distintos tipos de sensores 
-* Realizar la lectura de un potenciómetro para entender la conversión ADC 
-* Medir la variación de iluminación mediante una fotorresistencia (LDR) 
-* Medir la distancia en centímetros utilizando un sensor ultrasónico HC-SR04 
-
-## Materiales
-* (1×) Módulo ESP32 (NodeMCU 32S o similar)
-* (1×) Sensor Ultrasónico HC-SR04
-* (1×) Fotorresistencia LDR + resistor 10 kΩ
-* (1×) Potenciómetro de 10 kΩ
-* Protoboard, cables de conexión
-* Cable USB para programación
-
-## Desarrollo
-
-### Parte 1: Lectura de Potenciómetro
-<img src="-" width="50%">  
-*Circuito del potenciómetro conectado al ESP32.*
-
-<img src="-" width="50%">  
-*Código fuente implementado para el potenciómetro.*
-
-**Explicación:** Se conectó el potenciómetro a una entrada analógica (ADC) del ESP32. Al girar la perilla, el voltaje varía entre 0V y 3.3V, lo que el ESP32 convierte internamente en un rango numérico de 0 a 4095 que se imprime en el Monitor Serie.
+* Interfazar y caracterizar de manera independiente tres tipos de sensores analógicos habituales: Potenciómetro, Fotorresistor (LDR) y Sensor Ultrasónico (HC-SR04).
+* Adquirir y acondicionar señales analógicas mediante las entradas del Convertidor Analógico-Digital (ADC) del microcontrolador/tarjeta de desarrollo.
+* Validar el comportamiento, rango de medición y respuesta de cada sensor mediante esquemas, simulación e implementación física.
 
 ---
 
-### Parte 2: Sensor de Luz (LDR)
-<img src="-" alt="Circuito de la fotorresistencia LDR." width="50%">  
-*Circuito de la fotorresistencia LDR en protoboard.*
+## 1. Potenciómetro (Divisor de Tensión Variable)
 
-<img src="-" alt="Simulación de la LDR." width="50%">  
-*Simulación de la lectura de luz con LDR.*
+### Principio de Funcionamiento
+El potenciómetro actúa como un divisor de tensión ajustable manualmente. Al girar su perilla, se modifica la proporción de resistencia entre el terminal central (wiper) y los extremos conectados a $V_{CC}$ (5V) y $GND$. Esto produce un voltaje de salida analógico continuo que varía proporcionalmente entre $0\text{ V}$ y $5\text{ V}$.
 
-<img src="-" alt="Código para la LDR." width="50%">  
-*Código fuente implementado para la fotorresistencia LDR.*
+### Esquema y Simulación
+![Circuito y Simulación del Potenciómetro](../img_practica_4/potenciometro_esquema.png)
 
-**Explicación:** La LDR cambia su resistencia según la cantidad de luz ambiental. En conjunto con una resistencia fija de 10 kΩ formando un divisor de voltaje, el ESP32 lee la variación de voltaje en su pin analógico: a mayor luz disponible, mayor es el valor devuelto por el ADC.
+*Figura 1: Diagrama de conexión y simulación del potenciómetro conectado a una entrada analógica.*
+
+### Código de Implementación
+```cpp
+const int potPin = A0;
+int valorADC = 0;
+float voltaje = 0.0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  valorADC = analogRead(potPin);
+  voltaje = (valorADC * 5.0) / 1023.0;
+  
+  Serial.print("Lectura ADC: ");
+  Serial.print(valorADC);
+  Serial.print(" | Voltaje: ");
+  Serial.print(voltaje);
+  Serial.println(" V");
+  
+  delay(200);
+}
+
+```
 
 ---
 
-### Parte 3: Sensor Ultrasónico (HC-SR04)
-<img src="-" alt="Circuito del sensor ultrasónico." width="50%">  
-*Circuito del sensor ultrasónico conectado al ESP32.*
+## 2. Sensor de Luz (Fotorresistor LDR)
 
-<img src="-" alt="Simulación del sensor ultrasónico." width="50%">  
-*Simulación de la medición de distancia.*
+### Principio de Funcionamiento
 
-<img src="-" alt="Código para el sensor ultrasónico." width="50%">  
-*Código fuente implementado para el sensor ultrasónico.*
+La fotorresistencia (LDR) varía su resistencia eléctrica en función de la intensidad de luz incidente: a mayor iluminación, menor resistencia. Para convertir esta variación de resistencia en un voltaje medible por el ADC, se configura un circuito divisor de tensión con una resistencia fija de pull-down ($10\text{ k}\Omega$).
 
-[*Video de demostración de los sensores*](../img_practica_4/video-sensores-esp32.mp4)
+### Esquema y Simulación
 
-**Explicación:** Mediante el pin *Trig* se emite un pulso ultrasónico de alta frecuencia de 10 µs. Al chocar contra un objeto, el rebote regresa al pin *Echo*. El ESP32 mide el tiempo transcurrido con la función `pulseIn()` y calcula la distancia aplicando la fórmula de la velocidad del sonido.
+*Figura 2: Configuración en divisor de voltaje para el sensor de luz LDR.*
+
+### Código de Implementación
+
+```cpp
+const int ldrPin = A1;
+int valorLDR = 0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  valorLDR = analogRead(ldrPin);
+  
+  Serial.print("Nivel de luz (Valor ADC): ");
+  Serial.println(valorLDR);
+  
+  delay(300);
+}
+
+```
 
 ---
 
-| Sensor / Componente | Lectura en condición mínima | Lectura en condición máxima | Aplicación práctica |
-| --- | --- | --- | --- |
-| **Potenciómetro** | 0 (0 V) | 4095 (3.3 V) | Control manual de parámetros |
-| **LDR (Luz)** | ~400 (Oscuridad) | ~3500 (Mucha luz) | Detección de iluminación / Noche |
-| **Ultrasónico** | ~2.0 cm | ~200.0 cm | Detección de obstáculos y distancia |
+## 3. Sensor Ultrasónico (HC-SR04)
 
-## Fallas
-* **Síntoma:** El sensor ultrasónico no medía nada o arrojaba 0 cm constantes en el Monitor Serie.
-* **Cómo lo encontré:** Comprobamos que todo estuviera conectado a los pines correctos.
-* **Solución:** Corregimos la conexión en el simulador ya que habiamos cometido un error al conectar al pin de 3.3V de la ESP32.
+### Principio de Funcionamiento
 
-## Aprendizajes
-Aprendimos a implementar e interpretar sensores de manera independiente. Comprendimos el funcionamiento de las entradas analógicas (ADC de 12 bits) para el potenciómetro y la LDR, y el manejo de temporización digital precisa mediante pulsos para medir distancia con el sensor ultrasónico.
+El HC-SR04 mide distancias emitiendo ráfagas de ultrasonido a $40\text{ kHz}$ mediante el pin `Trig`. Al rebotar en un objeto, el eco regresa y es detectado por el sensor, manteniendo el pin `Echo` en nivel alto durante el tiempo transcurrido ($t$). Conociendo la velocidad del sonido en el aire ($\approx 343\text{ m/s}$ o $0.0343\text{ cm/}\mu\text{s}$), se calcula la distancia mediante la fórmula:
 
-## Siguiente paso
-Combinar las lecturas individuales de estos sensores en un solo programa para tomar decisiones de control complejas (por ejemplo, encender un motor o activar una alarma cuando un objeto esté cerca o haya poca luz).
+$$\text{Distancia (cm)} = \frac{t \times 0.0343}{2}$$
+
+### Esquema y Simulación
+
+*Figura 3: Conexión de los pines de disparo (Trig) y eco (Echo) del sensor ultrasónico.*
+
+### Código de Implementación
+
+```cpp
+const int trigPin = 9;
+const int echoPin = 8;
+
+long duracion;
+float distancia;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  duracion = pulseIn(echoPin, HIGH);
+  distancia = duracion * 0.0343 / 2.0;
+  
+  Serial.print("Distancia calculada: ");
+  Serial.print(distancia);
+  Serial.println(" cm");
+  
+  delay(250);
+}
+
+```
+
+---
+
+## Análisis de Resultados y Conclusiones
+
+* **Potenciómetro:** Presenta una respuesta lineal y muy estable, ideal para ajustes de calibración o control directo de variables por parte del usuario.
+* **LDR:** Muestra una respuesta no lineal pero altamente sensible a variaciones de luz ambiental, requiriendo umbrales de software para aplicaciones tipo encendido/apagado.
+* **HC-SR04:** Proporciona mediciones precisas de distancia en un rango de $2\text{ cm}$ a $400\text{ cm}$, requiriendo filtrado por software en caso de detectar ecos falsos o rebotes en ángulos inclinados.
+
+```
+
+---
+
+### Recordatorio para subir tus cambios:
+Una vez que pegues este código dentro de tu archivo `docs/Practicas/Practica4.md`, guarda los cambios (`Ctrl + S`) y ejecuta en la terminal:
+
+```bash
+git add .
+git commit -m "Actualizada Practica 4 con rutas de imagenes relativas"
+git push origin main
+mkdocs gh-deploy --force
+
+```
