@@ -701,27 +701,27 @@
 </ul>
 <h2 id="desarrollo">Desarrollo</h2>
 <h3 id="parte-1-lectura-de-potenciometro">Parte 1: Lectura de Potenciómetro</h3>
-<p><img src="../img_practica_4/potenciometro_sim.png" alt="Circuito del potenciómetro en protoboard." width="50%"><br />
+<p><img src="-" width="50%"><br />
 <em>Circuito del potenciómetro conectado al ESP32.</em></p>
-<p><img src="../img_practica_4/potenciometro_cod.png" alt="Código para el potenciómetro." width="50%"><br />
+<p><img src="-" width="50%"><br />
 <em>Código fuente implementado para el potenciómetro.</em></p>
 <p><strong>Explicación:</strong> Se conectó el potenciómetro a una entrada analógica (ADC) del ESP32. Al girar la perilla, el voltaje varía entre 0V y 3.3V, lo que el ESP32 convierte internamente en un rango numérico de 0 a 4095 que se imprime en el Monitor Serie.</p>
 <hr />
 <h3 id="parte-2-sensor-de-luz-ldr">Parte 2: Sensor de Luz (LDR)</h3>
-<p><img src="../img_practica_4/ldr_fisico.jpg" alt="Circuito de la fotorresistencia LDR." width="50%"><br />
+<p><img src="-" alt="Circuito de la fotorresistencia LDR." width="50%"><br />
 <em>Circuito de la fotorresistencia LDR en protoboard.</em></p>
-<p><img src="../img_practica_4/ldr_simulacion.jpg" alt="Simulación de la LDR." width="50%"><br />
+<p><img src="-" alt="Simulación de la LDR." width="50%"><br />
 <em>Simulación de la lectura de luz con LDR.</em></p>
-<p><img src="../img_practica_4/ldr_codigo.jpg" alt="Código para la LDR." width="50%"><br />
+<p><img src="-" alt="Código para la LDR." width="50%"><br />
 <em>Código fuente implementado para la fotorresistencia LDR.</em></p>
 <p><strong>Explicación:</strong> La LDR cambia su resistencia según la cantidad de luz ambiental. En conjunto con una resistencia fija de 10 kΩ formando un divisor de voltaje, el ESP32 lee la variación de voltaje en su pin analógico: a mayor luz disponible, mayor es el valor devuelto por el ADC.</p>
 <hr />
 <h3 id="parte-3-sensor-ultrasonico-hc-sr04">Parte 3: Sensor Ultrasónico (HC-SR04)</h3>
-<p><img src="../img_practica_4/ultrasonico_fisico.jpg" alt="Circuito del sensor ultrasónico." width="50%"><br />
+<p><img src="-" alt="Circuito del sensor ultrasónico." width="50%"><br />
 <em>Circuito del sensor ultrasónico conectado al ESP32.</em></p>
-<p><img src="../img_practica_4/ultrasonico_simulacion.jpg" alt="Simulación del sensor ultrasónico." width="50%"><br />
+<p><img src="-" alt="Simulación del sensor ultrasónico." width="50%"><br />
 <em>Simulación de la medición de distancia.</em></p>
-<p><img src="../img_practica_4/ultrasonico_codigo.jpg" alt="Código para el sensor ultrasónico." width="50%"><br />
+<p><img src="-" alt="Código para el sensor ultrasónico." width="50%"><br />
 <em>Código fuente implementado para el sensor ultrasónico.</em></p>
 <p><a href="../img_practica_4/video-sensores-esp32.mp4"><em>Video de demostración de los sensores</em></a></p>
 <p><strong>Explicación:</strong> Mediante el pin <em>Trig</em> se emite un pulso ultrasónico de alta frecuencia de 10 µs. Al chocar contra un objeto, el rebote regresa al pin <em>Echo</em>. El ESP32 mide el tiempo transcurrido con la función <code>pulseIn()</code> y calcula la distancia aplicando la fórmula de la velocidad del sonido.</p>

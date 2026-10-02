@@ -19,7 +19,7 @@
     
     
       
-        <title>Practica5 - Introdución a la Mecatrónica</title>
+        <title>Sesión 5 — Control e integración de actuadores con ESP32 - Introdución a la Mecatrónica</title>
       
     
     
@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#sesion-5-control-e-integracion-de-actuadores-con-esp32" class="md-skip">
+          Saltar a contenido
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Practica5
+              Sesión 5 — Control e integración de actuadores con ESP32
             
           </span>
         </div>
@@ -390,6 +395,82 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#materiales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Materiales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fallas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fallas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aprendizajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aprendizajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#siguiente-paso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Siguiente paso
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -406,9 +487,66 @@
 
 
 
-  <h1>Practica5</h1>
-
-
+<h1 id="sesion-5-control-e-integracion-de-actuadores-con-esp32">Sesión 5 — Control e integración de actuadores con ESP32</h1>
+<h2 id="objetivos">Objetivos</h2>
+<ul>
+<li>Integrar el control de múltiples actuadores (servomotores, motores DC o displays) mediante el ESP32 </li>
+<li>Implementar comunicación y control mediante señales de salida (PWM / Digitales) </li>
+<li>Desarrollar lógica de programación para automatizar la secuencia de activación de los componentes </li>
+</ul>
+<h2 id="materiales">Materiales</h2>
+<ul>
+<li>(1×) Módulo ESP32 (NodeMCU 32S o similar)</li>
+<li>(1×) Servomotor (SG90 o MG90S) / Motor DC</li>
+<li>(1×) Driver de potencia o módulo de control (Puente H L298N/L293D o Transistor)</li>
+<li>(1×) Fuente de alimentación externa (5V)</li>
+<li>Protoboard y cables de conexión</li>
+</ul>
+<h2 id="desarrollo">Desarrollo</h2>
+<p><img src="-" alt="Circuito físico de la Práctica 5 en protoboard." width="50%"><br />
+<em>Circuito armado en físico sobre la protoboard con el ESP32 y actuadores.</em></p>
+<p><img src="-" alt="Simulación digital del circuito." width="50%"><br />
+<em>Simulación del circuito en plataforma digital.</em></p>
+<p><img src="-" alt="Captura del código fuente en Arduino IDE." width="50%"><br />
+<em>Código fuente implementado en Arduino IDE.</em></p>
+<p><a href="../img_practica_5/video-practica5.mp4"><em>Video de demostración del funcionamiento</em></a></p>
+<p><strong>Explicación:</strong> En esta práctica se configuró el ESP32 para controlar la respuesta de un sistema físico mediante señales de salida. Se emplearon canales de control PWM / digital para manipular la posición o velocidad del actuador en función de la lógica definida en el código de Arduino IDE, asegurando una etapa de potencia aislada para evitar sobrecargas en la tarjeta de desarrollo.</p>
+<table>
+<thead>
+<tr>
+<th>Estado / Entrada</th>
+<th>Señal de salida (ESP32)</th>
+<th>Respuesta del actuador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estado Inicial / Reposo</td>
+<td>0% Duty / 0V</td>
+<td>Desactivado / Posición 0°</td>
+</tr>
+<tr>
+<td>Estado Intermedio</td>
+<td>50% Duty / Señal modulada</td>
+<td>Actividad a media potencia / Posición 90°</td>
+</tr>
+<tr>
+<td>Estado Máximo</td>
+<td>100% Duty / 3.3V</td>
+<td>Máxima potencia / Posición 180°</td>
+</tr>
+</tbody>
+</table>
+<h2 id="fallas">Fallas</h2>
+<ul>
+<li><strong>Síntoma:</strong> El actuador no respondía o el ESP32 presentaba reinicios inesperados al activar el componente.</li>
+<li><strong>Cómo lo encontré:</strong> Observamos caída de voltaje en la línea principal al intentar arrancar el actuador y revisamos las conexiones con el multímetro.</li>
+<li><strong>Solución:</strong> Separamos la línea de alimentación del actuador conectándolo a una fuente externa de 5V y unificando únicamente las tierras (GND) con el ESP32.</li>
+</ul>
+<h2 id="aprendizajes">Aprendizajes</h2>
+<p>Comprendimos cómo la etapa de salida del ESP32 interactúa con dispositivos que requieren mayor potencia o precisión de movimiento. Aprendimos a estructurar secuencias lógicas de control mediante software y a garantizar la protección eléctrica del microcontrolador.</p>
+<h2 id="siguiente-paso">Siguiente paso</h2>
+<p>Integrar en un solo sistema los sensores leídos en prácticas anteriores (como el ultrasónico o LDR) para activar de forma automática y autónoma estos actuadores según el entorno.</p>
 
 
 
