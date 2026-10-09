@@ -1,150 +1,158 @@
-# Práctica 5 — Actuadores: Control de Motores y Servomotores
+# Práctica 5: Comunicación Bluetooth y Protocolos de Control
+
+??? info "Información del Módulo"
+    - **Asignatura:** Introducción a la Mecatrónica
+    - **Tema:** Comunicación Inalámbrica Serie mediante Módulos Bluetooth (HC-05 / HC-06)
+    - **Requisitos previos:** Manejo de comunicación UART/Serial y control de salidas digitales.
+
+---
 
 ## Objetivos
-* Comprender e integrar actuadores electromecánicos fundamentales (Motores a Pasos, Servomotores y Motores DC) en sistemas mecatrónicos.
-* Implementar etapas de potencia e interfaseado adecuado (Puente H L298N/L293D, controladores A4988/ULN2003 y drivers de servomotores).
-* Analizar las técnicas de control de posición, velocidad y sentido de giro mediante señales PWM y secuencias de pasos.
+* **Enlace Bluetooth:** Configurar la comunicación serie con `SerialBT.begin()` (o `SoftwareSerial`), verificando que los comandos sean recibidos y mostrados correctamente en el Monitor Serial.
+* **Emparejamiento Estable:** Verificar que la vinculación serie inalámbrica entre el dispositivo móvil (Smartphone) y el módulo sea estable antes de ejecutar acciones de control.
+* **LED con Bluetooth:** Implementar el control digital de un LED mediante la recepción de comandos `ON` y `OFF` desde la aplicación del celular.
+* **Limpieza de Cadenas:** Aplicar el método de depuración de cadenas (`mensaje.trim()`) para eliminar saltos de línea (`\r`, `\n`) o espacios en blanco que provoquen fallas en la comparación de cadenas.
+* **Protocolo de Comandos:** Documentar e implementar la tabla de correspondencia entre comandos recibidos e instrucciones ejecutadas.
 
 ---
 
-## 1. Servomotor (Control de Posición Angular)
+## Materiales y Componentes
+
+| Componente | Cantidad | Descripción |
+| :--- | :---: | :--- |
+| **Microcontrolador** | 1 | Tarjeta de desarrollo (Arduino Uno, ESP32 o similar) |
+| **Módulo Bluetooth** | 1 | HC-05 (Maestro/Esclavo) o HC-06 (Esclavo) |
+| **Resistencias** | 2 | $1\text{ k}\Omega$ y $2.2\text{ k}\Omega$ (Divisor de tensión para la línea RX) |
+| **Diodo LED** | 1 | LED indicador con resistencia limitadora de $220\Omega$ |
+| **Dispositivo Móvil** | 1 | Smartphone Android con App Terminal Bluetooth (ej. *Serial Bluetooth Terminal*) |
+| **Protoboard y Cables** | 1 | Cables Dupont macho-macho / macho-hembra |
+
+---
+
+## Protocolo de Comandos
+
+Para garantizar un control preciso del sistema, se define la siguiente tabla de interpretación de comandos transmitidos vía Bluetooth:
+
+| Comando Recibido | Acción Ejecutada | Respuesta enviada al Celular |
+| :---: | :--- | :--- |
+| `ON` | Enciende el LED conectado al pin digital | `LED ACTIVADO` |
+| `OFF` | Apaga el LED conectado al pin digital | `LED DESACTIVADO` |
+
+---
+
+## 1. Configuración de Hardware y División de Voltaje
 
 ### Principio de Funcionamiento
-Un servomotor integra un motor DC, una caja reductora y un potenciómetro de retroalimentación interna. La posición del eje se controla mediante una señal **PWM (Pulse-Width Modulation)** de $50\text{ Hz}$ (periodo de $20\text{ ms}$), donde el ancho del pulso (habitualmente entre $1\text{ ms}$ y $2\text{ ms}$) determina el ángulo de salida (de $0^\circ$ a $180^\circ$).
+El módulo Bluetooth se comunica con el microcontrolador mediante puertos **UART** ($TX$/$RX$). Dado que los pines de datos del módulo operan a $3.3\text{V}$, se instala un **divisor de tensión** en el pin de recepción ($RX$) para proteger el módulo frente a las señales de $5\text{V}$ del microcontrolador.
 
-### Esquema y Simulación
-![Esquema de conexión del Servomotor](../img_practica_5/servo_esquema.png)
+$$V_{RX} = V_{TX} \times \frac{R_2}{R_1 + R_2} = 5\text{V} \times \frac{2.2\text{ k}\Omega}{1\text{ k}\Omega + 2.2\text{ k}\Omega} \approx 3.43\text{V}$$
 
-*Figura 1: Conexión del servomotor alimentado externamente con señal de control en pin PWM.*
+### Esquema de Conexión
+![Esquema de conexión Bluetooth HC-05](../img_practica_5/bluetooth_esquema.png)
 
-### Código de Implementación
-```cpp
-#include <Servo.h>
-
-Servo miServo;
-const int pinServo = 9;
-
-void setup() {
-  miServo.attach(pinServo);
-}
-
-void loop() {
-  // Barrido de 0 a 180 grados
-  for (int angulo = 0; angulo <= 180; angulo += 10) {
-    miServo.write(angulo);
-    delay(15);
-  }
-  delay(500);
-
-  // Barrido de 180 a 0 grados
-  for (int angulo = 180; angulo >= 0; angulo -= 10) {
-    miServo.write(angulo);
-    delay(15);
-  }
-  delay(500);
-}
-
-```
+*Figura 1: Circuito de interfaz Bluetooth con acondicionamiento de señal en el pin RX.*
 
 ---
 
-## 2. Motor DC con Puente H (Control de Velocidad y Sentido)
+## 2. Código de Implementación
 
-### Principio de Funcionamiento
+!!! tip "Uso del método .trim()"
+    Las aplicaciones de terminal Bluetooth suelen enviar automáticamente caracteres invisibles de fin de línea (`\r` o `\n`). Al aplicar `mensaje.trim()`, eliminamos estos caracteres para que la comparación `mensaje == "ON"` o `mensaje == "OFF"` funcione de manera exacta.
 
-Los motores de corriente continua requieren una etapa de potencia debido a que sus consumos de corriente superan los límites seguros del microcontrolador. Mediante un **Puente H (L298N o L293D)**, se invierte la polaridad aplicada al motor para cambiar el sentido de giro, y se aplica una señal **PWM** en los pines de habilitación (Enable) para modular la velocidad angular.
+=== "Arduino C++ (ESP32 - Bluetooth Nativo)"
+    ```cpp
+    #include "BluetoothSerial.h"
 
-### Esquema y Simulación
+    BluetoothSerial SerialBT;
+    const int pinLED = 2;
 
-*Figura 2: Interfaseado de Motor DC con driver Puente H y alimentación externa.*
+    void setup() {
+      pinMode(pinLED, OUTPUT);
+      digitalWrite(pinLED, LOW);
 
-### Código de Implementación
+      Serial.begin(115200);
+      
+      // Inicialización del servicio Bluetooth
+      SerialBT.begin("Mecatronica_BT"); 
+      Serial.println("Bluetooth iniciado. Asóciate con 'Mecatronica_BT'");
+    }
 
-```cpp
-const int in1 = 4;
-const int in2 = 5;
-const int ena = 6; // Pin PWM
+    void loop() {
+      if (SerialBT.available()) {
+        String mensaje = SerialBT.readString();
+        
+        // Limpieza de caracteres de escape y saltos de línea
+        mensaje.trim(); 
 
-void setup() {
-  pinMode(in1, OUTPUT);
-  pinMode(in2, OUTPUT);
-  pinMode(ena, OUTPUT);
-}
+        Serial.print("Comando recibido: [");
+        Serial.print(mensaje);
+        Serial.println("]");
 
-void loop() {
-  // Giro en sentido horario a velocidad media (128/255)
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-  analogWrite(ena, 128);
-  delay(2000);
+        if (mensaje.equalsIgnoreCase("ON")) {
+          digitalWrite(pinLED, HIGH);
+          SerialBT.println("LED ACTIVADO");
+        } else if (mensaje.equalsIgnoreCase("OFF")) {
+          digitalWrite(pinLED, LOW);
+          SerialBT.println("LED DESACTIVADO");
+        }
+      }
+    }
+    ```
 
-  // Giro en sentido antihorario a velocidad máxima (255/255)
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, HIGH);
-  analogWrite(ena, 255);
-  delay(2000);
+=== "Arduino C++ (Arduino Uno - SoftwareSerial)"
+    ```cpp
+    #include <SoftwareSerial.h>
 
-  // Paro de motor
-  digitalWrite(in1, LOW);
-  digitalWrite(in2, LOW);
-  analogWrite(ena, 0);
-  delay(1000);
-}
+    SoftwareSerial miBT(2, 3); // RX = 2, TX = 3
+    const int pinLED = 13;
 
-```
+    void setup() {
+      pinMode(pinLED, OUTPUT);
+      digitalWrite(pinLED, LOW);
 
----
+      Serial.begin(9600);
+      miBT.begin(9600);
 
-## 3. Motor a Pasos (Control de Pasos y Torque)
+      Serial.println("Bluetooth Listo. Esperando comandos ON / OFF...");
+    }
 
-### Principio de Funcionamiento
+    void loop() {
+      if (miBT.available()) {
+        String mensaje = miBT.readString();
+        
+        // Limpieza de caracteres \r y \n
+        mensaje.trim(); 
 
-Un motor a pasos (como el unipolar 28BYJ-48 con ULN2003 o un bipolar NEMA con A4988) divide una vuelta completa en un número exacto de pasos discretos. Energizando las bobinas internas en una secuencia determinada (Full-Step, Half-Step o Microstepping), se logra un control de posición preciso sin necesidad de sensores de retroalimentación externos.
+        Serial.print("Comando interpretado: ");
+        Serial.println(mensaje);
 
-### Esquema y Simulación
-
-*Figura 3: Conexión de controlador de motor a pasos con secuencia de bobinado.*
-
-### Código de Implementación
-
-```cpp
-#include <Stepper.h>
-
-const int pasosPorVuelta = 200; // Ajustar según el motor
-Stepper miStepper(pasosPorVuelta, 8, 9, 10, 11);
-
-void setup() {
-  miStepper.setSpeed(60); // 60 RPM
-}
-
-void loop() {
-  // Una vuelta completa en sentido horario
-  miStepper.step(pasosPorVuelta);
-  delay(1000);
-
-  // Una vuelta completa en sentido antihorario
-  miStepper.step(-pasosPorVuelta);
-  delay(1000);
-}
-
-```
-
----
-
-## Análisis de Fallos y Diagnóstico
-
-* **Reinicio inesperado del microcontrolador:** Causa común por picos de corriente o ruido inductivo de los motores. **Solución:** Separar la fuente de alimentación del circuito de control y compartir las tierras ($GND$).
-* **Falta de torque en el servomotor o vibraciones:** Señal PWM inestable o voltaje de alimentación inferior al mínimo requerido ($5\text{V} - 6\text{V}$).
-* **Calentamiento excesivo del puente H:** Inexistencia de diodos de libre circulación o sobrepaso de la corriente máxima continua nominal del CI.
+        if (mensaje.equalsIgnoreCase("ON")) {
+          digitalWrite(pinLED, HIGH);
+          miBT.println("LED ACTIVADO");
+        } else if (mensaje.equalsIgnoreCase("OFF")) {
+          digitalWrite(pinLED, LOW);
+          miBT.println("LED DESACTIVADO");
+        }
+      }
+    }
+    ```
 
 ---
 
-## Aprendizaje
+## Solución de Problemas y Diagnóstico
 
-Comprendimos cómo la etapa de salida del ESP32 interactúa con dispositivos que requieren mayor potencia o precisión de movimiento. Aprendimos a estructurar secuencias lógicas de control mediante software y a garantizar la protección eléctrica del microcontrolador.
+??? warning "El comando 'ON' o 'OFF' es enviado pero el LED no responde"
+    **Causa:** La aplicación del celular transmite un salto de línea adicional (`\r\n`) al presionar enviar, haciendo que la cadena no coincida exactamente con `"ON"`.  
+    **Solución:** Asegúrate de incluir `mensaje.trim()` antes de la instrucción de comparación `if`, o configura tu app móvil para que no envíe terminadores de línea (*New Line*).
 
---- 
+??? warning "El emparejamiento se desconecta constantemente"
+    **Causa:** Caídas de voltaje por fuente de alimentación inestable o interferencias en el pin $TX$/$RX$.  
+    **Solución:** Verifica la solidez de las tierras ($GND$) compartidas y asegura que la señal en el pin $RX$ esté regulada con el divisor de tensión.
+
+---
 
 ## Siguiente Paso
 
-Integrar en un solo sistema los sensores leídos en prácticas anteriores (como el ultrasónico o LDR) para activar de forma automática y autónoma estos actuadores según el entorno.
+Una vez validado el protocolo de comandos inalámbricos básicos (`ON`/`OFF`), pasamos a la aplicación en sistemas dinámicos:
+
+* **[Práctica 6: Integración de Sensores y Actuadores](../Practica6/)** — Control remoto de actuadores y lectura remota de variables analógicas.
