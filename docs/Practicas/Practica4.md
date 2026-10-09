@@ -1,6 +1,3 @@
-Aquí tienes el código **Markdown completo** para la **Práctica 4**, conservando todo el texto detallado de la práctica y utilizando la sintaxis nativa de imágenes `![Texto](../Ruta/imagen.ext)`:
-
-```markdown
 # Práctica 4 — Sensores Analógicos Individuales
 
 ## Objetivos
