@@ -1,10 +1,5 @@
 # Práctica 5: Comunicación Bluetooth y Protocolos de Control
 
-??? info "Información del Módulo"
-    - **Asignatura:** Introducción a la Mecatrónica
-    - **Tema:** Comunicación Inalámbrica Serie mediante Módulos Bluetooth (HC-05 / HC-06)
-    - **Requisitos previos:** Manejo de comunicación UART/Serial y control de salidas digitales.
-
 ---
 
 ## Objetivos
