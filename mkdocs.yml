@@ -10,11 +10,11 @@ theme:
 nav:
   - Inicio: index.md
   - Prácticas:
-      - Práctica 1: Practicas/Practica1/Practica 1.md
-      - Práctica 2: Practicas/Practica2/Practica 2.md
-      - Práctica 3: Practicas/Practica3/iPractica 3.md
-      - Práctica 4: Practicas/Practica4/Practica 4.md
-      - Práctica 5: Practicas/Practica5/Practica 5.md
-      - Práctica 6: Practicas/Practica6/Practica 6.md
+      - Práctica 1: Practicas/Practica1.md
+      - Práctica 2: Practicas/Practica2.md
+      - Práctica 3: Practicas/Practica3.md
+      - Práctica 4: Practicas/Practica4.md
+      - Práctica 5: Practicas/Practica5.md
+      - Práctica 6: Practicas/Practica6.md
   - Proyectos:
-      - Proyecto 1: Proyectos/Proyecto1/iProyecto 1.md
+      - Proyecto 1: Proyectos/Proyecto1.md
