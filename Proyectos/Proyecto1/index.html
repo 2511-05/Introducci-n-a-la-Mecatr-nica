@@ -901,7 +901,7 @@
 <h1 id="proyecto-1-carrito-movil-autonomo-controlado">Proyecto 1 — Carrito Móvil Autónomo / Controlado</h1>
 <h2 id="objetivos">Objetivos</h2>
 <ul>
-<li>Diseñar e integrar un vehículo móvil autónomo/controlado utilizando la tarjeta microcontroladora ESP32.</li>
+<li>Diseñar e integrar un vehículo móvil autónomo/controlado utilizando la tarjeta microcontroladora.</li>
 <li>Dimensionar y fabricar un chasis funcional mediante iteraciones mecánicas para cumplir con las restricciones de tamaño de la competencia.</li>
 <li>Implementar la etapa de potencia e interfaz inalámbrica de comandos (vía Bluetooth) con control de tracción diferencial.</li>
 <li>Documentar las fallas estructurales y de acoplamiento sufridas durante el desarrollo y su respectiva resolución.</li>
@@ -911,8 +911,8 @@
 <p>Para la validación y evaluación del vehículo se definieron los siguientes criterios de desempeño y construcción:</p>
 <ul>
 <li><strong>Dimensiones Límite:</strong> Ajuste estricto del chasis al tamaño máximo estipulado por las reglas de la práctica.</li>
-<li><strong>Control Inalámbrico:</strong> Recepción e interpretación de comandos mediante comunicación serie Bluetooth en la ESP32.</li>
-<li><strong>Alimentación Autónoma:</strong> Sistema de energía portátil e independiente (Power Bank) para la electrónica de control y motores.</li>
+<li><strong>Control Inalámbrico:</strong> Recepción e interpretación de comandos mediante comunicación serie Bluetooth (HC-06).</li>
+<li><strong>Alimentación Autónoma:</strong> Sistema de energía portátil e independiente para la electrónica de control y motores.</li>
 <li><strong>Acoplamiento Mecánico:</strong> Ensamble sólido de motores, ruedas y componentes sin desprendimientos en movimiento.</li>
 <li><strong>Prueba de Rodamiento:</strong> Desplazamiento continuo y estable en la pista de pruebas.</li>
 </ul>
@@ -942,15 +942,15 @@
 <h3 id="procedimiento-de-iteracion">Procedimiento de Iteración</h3>
 <ol>
 <li><strong>Semana 1 — Prototipado Inicial y Lógica:</strong></li>
-<li>Se diseñó el chasis v1 y se escribió el código de recepción de comandos en la ESP32.</li>
+<li>Se diseñó el chasis v1 y se escribió el código de recepción de comandos vía Bluetooth.</li>
 <li>
 <p><em>Resultado:</em> El prototipo funcionó electrónicamente, pero excedió las dimensiones límite del proyecto.</p>
 </li>
 <li>
 <p><strong>Semana 2 — Rediseño Mecánico y Ensamble Final:</strong></p>
 </li>
-<li>Se reconstruyó el chasis (versión v2) optimizando el espacio interior para alojar la batería portátil verticalmente.</li>
-<li>Se realizó el ensamble definitivo del interruptor, motores y tarjeta ESP32, superando las pruebas de rodamiento.</li>
+<li>Se construyó un nuevo chasis más sencillo con las dimensiones correctas para optimizar el espacio interior.</li>
+<li>Se aplicó un pegamento más resistente en las llantas para asegurar su fijación y se realizó el ensamble definitivo con el driver TB6612FNG, superando las pruebas de rodamiento.</li>
 </ol>
 <hr />
 <h2 id="3-lista-de-materiales-bom">3. Lista de Materiales (BOM)</h2>
@@ -965,10 +965,22 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Tarjeta ESP32</strong></td>
+<td style="text-align: left;"><strong>Tarjeta Microcontroladora</strong></td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">$150.00</td>
 <td style="text-align: center;">$150.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Módulo Bluetooth HC-06</strong></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">$80.00</td>
+<td style="text-align: center;">$80.00</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Driver de Motores TB6612FNG</strong></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">$60.00</td>
+<td style="text-align: center;">$60.00</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Batería Portátil (Power Bank)</strong></td>
@@ -1001,16 +1013,16 @@
 <td style="text-align: center;">$0.00</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Otros Materiales / Ajustes</strong></td>
+<td style="text-align: left;"><strong>Pegamento de Alta Resistencia</strong></td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">$0.00</td>
-<td style="text-align: center;">$0.00</td>
+<td style="text-align: center;">$25.00</td>
+<td style="text-align: center;">$25.00</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>TOTAL</strong></td>
 <td style="text-align: center;">—</td>
 <td style="text-align: center;">—</td>
-<td style="text-align: center;"><strong>$470.00</strong></td>
+<td style="text-align: center;"><strong>$635.00</strong></td>
 </tr>
 </tbody>
 </table>
@@ -1027,111 +1039,84 @@
 <ul>
 <li><strong>Descripción:</strong> El primer prototipo del chasis (Semana 1) no cumplía con los límites de tamaño solicitados para la prueba.</li>
 <li><strong>Causa:</strong> En el primer dibujo no se contempló el espacio adicional que ocupaban el ancho de las ruedas y la posición de la batería portátil.</li>
-<li><strong>Solución:</strong> Tuvimos que rehacer el chasis desde cero en la Semana 2, redistribuyendo los elementos de forma compacta para cumplir con las medidas exactas.</li>
+<li><strong>Solución:</strong> Realizar un nuevo chasis más sencillo y con las dimensiones correctas que permitiera ajustar todos los componentes dentro del límite permitido.</li>
 </ul>
 <h3 id="falla-2-desprendimiento-continuo-de-las-llantas">Falla 2 — Desprendimiento continuo de las llantas</h3>
 <ul>
-<li><strong>Descripción:</strong> Durante los ensayos de movimiento, las ruedas se zafaban del eje de los motoreductores con facilidad.</li>
-<li><strong>Causa:</strong> Holgura en la unión mecánica entre la flecha del motor y la rueda ante las vibraciones del giro.</li>
-<li><strong>Solución:</strong> Se corrigió el acople en el chasis v2 aplicando mayor presión y alineación adecuada en los soportes de los motores.</li>
+<li><strong>Descripción:</strong> Durante los ensayos de movimiento, las ruedas se zafaban del eje de los motoreductores con facilidad al girar.</li>
+<li><strong>Causa:</strong> Holgura en la unión mecánica entre la flecha del motor y el acople de la rueda ante el par de tracción y las vibraciones del movimiento.</li>
+<li><strong>Solución:</strong> Utilizar un pegamento más resistente para fijar adecuadamente las llantas a los ejes de los motores, evitando que se desprendan durante el rodamiento.</li>
 </ul>
 <hr />
 <h2 id="6-codigo-de-implementacion">6. Código de Implementación</h2>
-<p>Para asegurar una respuesta precisa a los comandos inalámbricos, se limpia la cadena recibida mediante <code>mensaje.trim()</code>, evitando fallos causados por caracteres de salto de línea (<code>\r</code>, <code>\n</code>).</p>
-<p>```cpp</p>
-<h1 id="include-bluetoothserialh">include "BluetoothSerial.h"</h1>
-<p>BluetoothSerial SerialBT;</p>
-<p>// Pines de control del puente H / motores
-const int IN1 = 12;
-const int IN2 = 13;
-const int IN3 = 14;
-const int IN4 = 27;</p>
+<p>El siguiente código escrito en C++ para Arduino utiliza la librería <code>SoftwareSerial</code> para la comunicación con el módulo Bluetooth HC-06 y controla las direcciones y velocidades de los motores mediante el puente H TB6612FNG:</p>
+<p>```cpp
+//TimeMec</p>
+<h1 id="include">include <SoftwareSerial.h></h1>
+<p>SoftwareSerial BT(0, 1);  // RX, TX en los pines por defecto</p>
+<p>// Pines del TB6612FNG</p>
+<h1 id="define-pwma-6">define PWMA 6</h1>
+<h1 id="define-ain1-7">define AIN1 7</h1>
+<h1 id="define-ain2-8">define AIN2 8</h1>
+<h1 id="define-pwmb-11">define PWMB 11</h1>
+<h1 id="define-bin1-9">define BIN1 9</h1>
+<h1 id="define-bin2-10">define BIN2 10</h1>
+<h1 id="define-stby-12">define STBY 12</h1>
 <p>void setup() {
-  pinMode(IN1, OUTPUT);
-  pinMode(IN2, OUTPUT);
-  pinMode(IN3, OUTPUT);
-  pinMode(IN4, OUTPUT);</p>
-<p>Serial.begin(115200);
-  SerialBT.begin("ESP32_Carrito_P1");
-  Serial.println("Sistema listo. Esperando comandos via Bluetooth...");
-}</p>
+    BT.begin(9600);      // Comunicación con HC-06</p>
+<pre><code>// Configurar pines del TB6612FNG
+pinMode(PWMA, OUTPUT);
+pinMode(AIN1, OUTPUT);
+pinMode(AIN2, OUTPUT);
+pinMode(PWMB, OUTPUT);
+pinMode(BIN1, OUTPUT);
+pinMode(BIN2, OUTPUT);
+pinMode(STBY, OUTPUT);
+
+digitalWrite(STBY, HIGH);  // Activar el puente H
+</code></pre>
+<p>}</p>
+<p>void mover(int velocidadA, int dirA1, int dirA2, int velocidadB, int dirB1, int dirB2) {
+    analogWrite(PWMA, velocidadA);
+    digitalWrite(AIN1, dirA1);
+    digitalWrite(AIN2, dirA2);</p>
+<pre><code>analogWrite(PWMB, velocidadB);
+digitalWrite(BIN1, dirB1);
+digitalWrite(BIN2, dirB2);
+</code></pre>
+<p>}</p>
 <p>void loop() {
-  if (SerialBT.available()) {
-    String mensaje = SerialBT.readString();</p>
-<pre><code>// Limpieza de caracteres invisibles \r y \n
-mensaje.trim();
-
-Serial.print("Comando recibido: [");
-Serial.print(mensaje);
-Serial.println("]");
-
-if (mensaje.equalsIgnoreCase("ON") || mensaje.equalsIgnoreCase("F")) {
-  // Avanzar
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  SerialBT.println("Estado: Avanzando");
-} 
-else if (mensaje.equalsIgnoreCase("OFF") || mensaje.equalsIgnoreCase("S")) {
-  // Detener
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
-  SerialBT.println("Estado: Detenido");
+    if (BT.available()) {
+        char command = BT.read();</p>
+<pre><code>    switch (command) {
+        case 'U': // Adelante
+            mover(140, HIGH, LOW, 150, HIGH, LOW);
+            break;
+        case 'D': // Atrás
+            mover(120, LOW, HIGH, 150, LOW, HIGH);
+            break;
+        case 'L': // Izquierda
+            mover(100, LOW, HIGH, 100, HIGH, LOW);
+            break;
+        case 'R': // Derecha
+            mover(100, HIGH, LOW, 100, LOW, HIGH);
+            break;
+        case 'T': // Triángulo (Ejemplo: Acelerar)
+            mover(195, HIGH, LOW, 205, HIGH, LOW);
+            break;
+        case 'Q': // Cuadrado (Ejemplo: Gira en el sitio a la izquierda)
+            mover(160, LOW, HIGH, 150, LOW, HIGH);
+            break;
+        case 'C': // Círculo (Ejemplo: Gira en el sitio a la derecha)
+            mover(150, HIGH, LOW, 160, HIGH, LOW);
+            break;
+        case 'X': // X (Detenerse)
+            mover(0, LOW, LOW, 0, LOW, LOW);
+            break;
+    }
 }
 </code></pre>
-<p>}
-}</p>
-<hr />
-<h2 id="7-resultado-final-y-demostracion">7. Resultado Final y Demostración</h2>
-<h3 id="fotografia-del-carrito-terminado">Fotografía del Carrito Terminado</h3>
-<p><img alt="Resultado Final del Carrito" src="../img_proyecto_1/resultado_final.jpg" /></p>
-<p><em>Figura 3: Ensamble final del carrito móvil sobre el chasis v2 definitivo.</em></p>
-<h3 id="video-de-demostracion">Video de Demostración</h3>
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE" title="Demostración Proyecto 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<hr />
-<h2 id="8-lista-de-requisitos-cumplidos">8. Lista de Requisitos Cumplidos</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Requisito Solicitado</th>
-<th style="text-align: center;">Estado</th>
-<th style="text-align: left;">Observación / Solución Aplicada</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"><strong>Ajuste de Dimensiones</strong></td>
-<td style="text-align: center;">✔️ Cumplido</td>
-<td style="text-align: left;">Rediseño exitoso en la Semana 2 mediante el chasis v2, adaptando la batería verticalmente para no sobrepasar los límites.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Fijación Mecánica Firme</strong></td>
-<td style="text-align: center;">✔️ Cumplido</td>
-<td style="text-align: left;">Corrección del acople entre las ruedas y los motoreductores, evitando que se desprendan durante la marcha.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Alimentación Autónoma</strong></td>
-<td style="text-align: center;">✔️ Cumplido</td>
-<td style="text-align: left;">Operación inalámbrica y continua mediante la batería portátil (Power Bank) integrada en la estructura.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><strong>Control Inalámbrico</strong></td>
-<td style="text-align: center;">✔️ Cumplido</td>
-<td style="text-align: left;">Procesamiento correcto de comandos <code>ON</code>/<code>OFF</code> y movimientos recibidos por comunicación Bluetooth en la ESP32.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="9-aprendizajes-del-proyecto">9. Aprendizajes del Proyecto</h2>
-<ol>
-<li><strong>Consideración de Volúmenes Reales en CAD:</strong> Aprendimos a contemplar las dimensiones físicas absolutas de todos los periféricos (cables, conectores, llantas y batería) desde el primer boceto para evitar tener que rehacer el chasis por completo.</li>
-<li><strong>Acondicionamiento Mecánico y Tolerancias:</strong> Comprobamos la importancia de asegurar un acople firme entre las ruedas y la flecha de los motoreductores para resistir las vibraciones del movimiento continuo.</li>
-<li><strong>Iteración de Prototipado:</strong> Experimentamos el proceso real de desarrollo mecatrónico, donde las fallas detectadas en el primer prototipo sirvieron como base para lograr una versión v2 completamente funcional.</li>
-</ol>
+<p>}</p>
 
 
 
