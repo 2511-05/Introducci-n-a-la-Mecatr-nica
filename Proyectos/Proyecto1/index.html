@@ -700,6 +700,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-resultado-final-y-demostracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Resultado Final y Demostración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Resultado Final y Demostración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fotografia-del-carrito-terminado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fotografía del Carrito Terminado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-de-demostracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Video de Demostración
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-lista-de-requisitos-cumplidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Lista de Requisitos Cumplidos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-aprendizajes-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Aprendizajes del Proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -881,6 +942,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-resultado-final-y-demostracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Resultado Final y Demostración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Resultado Final y Demostración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fotografia-del-carrito-terminado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fotografía del Carrito Terminado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-de-demostracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Video de Demostración
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-lista-de-requisitos-cumplidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Lista de Requisitos Cumplidos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-aprendizajes-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Aprendizajes del Proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1051,73 +1173,79 @@
 <hr />
 <h2 id="6-codigo-de-implementacion">6. Código de Implementación</h2>
 <p>El siguiente código escrito en C++ para Arduino utiliza la librería <code>SoftwareSerial</code> para la comunicación con el módulo Bluetooth HC-06 y controla las direcciones y velocidades de los motores mediante el puente H TB6612FNG:</p>
-<p>```cpp
-//TimeMec</p>
-<h1 id="include">include <SoftwareSerial.h></h1>
-<p>SoftwareSerial BT(0, 1);  // RX, TX en los pines por defecto</p>
-<p>// Pines del TB6612FNG</p>
-<h1 id="define-pwma-6">define PWMA 6</h1>
-<h1 id="define-ain1-7">define AIN1 7</h1>
-<h1 id="define-ain2-8">define AIN2 8</h1>
-<h1 id="define-pwmb-11">define PWMB 11</h1>
-<h1 id="define-bin1-9">define BIN1 9</h1>
-<h1 id="define-bin2-10">define BIN2 10</h1>
-<h1 id="define-stby-12">define STBY 12</h1>
-<p>void setup() {
-    BT.begin(9600);      // Comunicación con HC-06</p>
-<pre><code>// Configurar pines del TB6612FNG
-pinMode(PWMA, OUTPUT);
-pinMode(AIN1, OUTPUT);
-pinMode(AIN2, OUTPUT);
-pinMode(PWMB, OUTPUT);
-pinMode(BIN1, OUTPUT);
-pinMode(BIN2, OUTPUT);
-pinMode(STBY, OUTPUT);
+<pre><code class="language-cpp">//TimeMec
+#include &lt;SoftwareSerial.h&gt;
 
-digitalWrite(STBY, HIGH);  // Activar el puente H
-</code></pre>
-<p>}</p>
-<p>void mover(int velocidadA, int dirA1, int dirA2, int velocidadB, int dirB1, int dirB2) {
+SoftwareSerial BT(0, 1);  // RX, TX en los pines por defecto
+
+// Pines del TB6612FNG
+#define PWMA 6
+#define AIN1 7
+#define AIN2 8
+#define PWMB 11
+#define BIN1 9
+#define BIN2 10
+#define STBY 12
+
+void setup() {
+    BT.begin(9600);      // Comunicación con HC-06
+
+    // Configurar pines del TB6612FNG
+    pinMode(PWMA, OUTPUT);
+    pinMode(AIN1, OUTPUT);
+    pinMode(AIN2, OUTPUT);
+    pinMode(PWMB, OUTPUT);
+    pinMode(BIN1, OUTPUT);
+    pinMode(BIN2, OUTPUT);
+    pinMode(STBY, OUTPUT);
+
+    digitalWrite(STBY, HIGH);  // Activar el puente H
+}
+
+void mover(int velocidadA, int dirA1, int dirA2, int velocidadB, int dirB1, int dirB2) {
     analogWrite(PWMA, velocidadA);
     digitalWrite(AIN1, dirA1);
-    digitalWrite(AIN2, dirA2);</p>
-<pre><code>analogWrite(PWMB, velocidadB);
-digitalWrite(BIN1, dirB1);
-digitalWrite(BIN2, dirB2);
-</code></pre>
-<p>}</p>
-<p>void loop() {
+    digitalWrite(AIN2, dirA2);
+
+    analogWrite(PWMB, velocidadB);
+    digitalWrite(BIN1, dirB1);
+    digitalWrite(BIN2, dirB2);
+}
+
+void loop() {
     if (BT.available()) {
-        char command = BT.read();</p>
-<pre><code>    switch (command) {
-        case 'U': // Adelante
-            mover(140, HIGH, LOW, 150, HIGH, LOW);
-            break;
-        case 'D': // Atrás
-            mover(120, LOW, HIGH, 150, LOW, HIGH);
-            break;
-        case 'L': // Izquierda
-            mover(100, LOW, HIGH, 100, HIGH, LOW);
-            break;
-        case 'R': // Derecha
-            mover(100, HIGH, LOW, 100, LOW, HIGH);
-            break;
-        case 'T': // Triángulo (Ejemplo: Acelerar)
-            mover(195, HIGH, LOW, 205, HIGH, LOW);
-            break;
-        case 'Q': // Cuadrado (Ejemplo: Gira en el sitio a la izquierda)
-            mover(160, LOW, HIGH, 150, LOW, HIGH);
-            break;
-        case 'C': // Círculo (Ejemplo: Gira en el sitio a la derecha)
-            mover(150, HIGH, LOW, 160, HIGH, LOW);
-            break;
-        case 'X': // X (Detenerse)
-            mover(0, LOW, LOW, 0, LOW, LOW);
-            break;
+        char command = BT.read();
+
+        switch (command) {
+            case 'U': // Adelante
+                mover(140, HIGH, LOW, 150, HIGH, LOW);
+                break;
+            case 'D': // Atrás
+                mover(120, LOW, HIGH, 150, LOW, HIGH);
+                break;
+            case 'L': // Izquierda
+                mover(100, LOW, HIGH, 100, HIGH, LOW);
+                break;
+            case 'R': // Derecha
+                mover(100, HIGH, LOW, 100, LOW, HIGH);
+                break;
+            case 'T': // Triángulo (Ejemplo: Acelerar)
+                mover(195, HIGH, LOW, 205, HIGH, LOW);
+                break;
+            case 'Q': // Cuadrado (Ejemplo: Gira en el sitio a la izquierda)
+                mover(160, LOW, HIGH, 150, LOW, HIGH);
+                break;
+            case 'C': // Círculo (Ejemplo: Gira en el sitio a la derecha)
+                mover(150, HIGH, LOW, 160, HIGH, LOW);
+                break;
+            case 'X': // X (Detenerse)
+                mover(0, LOW, LOW, 0, LOW, LOW);
+                break;
+        }
     }
 }
+
 </code></pre>
-<h2 id="_1">}</h2>
 <h2 id="7-resultado-final-y-demostracion">7. Resultado Final y Demostración</h2>
 <h3 id="fotografia-del-carrito-terminado">Fotografía del Carrito Terminado</h3>
 <p><img alt="Resultado Final del Carrito" src="../img_proyecto_1/resultado_final.jpg" /></p>
