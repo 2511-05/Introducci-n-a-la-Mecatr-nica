@@ -866,12 +866,12 @@
 <tr>
 <td style="text-align: left;"><strong>Resistencias</strong></td>
 <td style="text-align: center;">2</td>
-<td style="text-align: left;">$1\text{ k}\Omega$ y $2.2\text{ k}\Omega$ (Divisor de tensión para la línea RX)</td>
+<td style="text-align: left;"><span class="arithmatex">\(1\text{ k}\Omega\)</span> y <span class="arithmatex">\(2.2\text{ k}\Omega\)</span> (Divisor de tensión para la línea RX)</td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Diodo LED</strong></td>
 <td style="text-align: center;">1</td>
-<td style="text-align: left;">LED indicador con resistencia limitadora de $220\Omega$</td>
+<td style="text-align: left;">LED indicador con resistencia limitadora de <span class="arithmatex">\(220\Omega\)</span></td>
 </tr>
 <tr>
 <td style="text-align: left;"><strong>Dispositivo Móvil</strong></td>
@@ -912,8 +912,8 @@
 <hr />
 <h2 id="1-configuracion-de-hardware-y-division-de-voltaje">1. Configuración de Hardware y División de Voltaje</h2>
 <h3 id="principio-de-funcionamiento">Principio de Funcionamiento</h3>
-<p>El módulo Bluetooth se comunica con el microcontrolador mediante puertos <strong>UART</strong> ($TX$/$RX$). Dado que los pines de datos del módulo operan a $3.3\text{V}$, se instala un <strong>divisor de tensión</strong> en el pin de recepción ($RX$) para proteger el módulo frente a las señales de $5\text{V}$ del microcontrolador.</p>
-<p>$$V_{RX} = V_{TX} \times \frac{R_2}{R_1 + R_2} = 5\text{V} \times \frac{2.2\text{ k}\Omega}{1\text{ k}\Omega + 2.2\text{ k}\Omega} \approx 3.43\text{V}$$</p>
+<p>El módulo Bluetooth se comunica con el microcontrolador mediante puertos <strong>UART</strong> (<span class="arithmatex">\(TX\)</span>/<span class="arithmatex">\(RX\)</span>). Dado que los pines de datos del módulo operan a <span class="arithmatex">\(3.3\text{V}\)</span>, se instala un <strong>divisor de tensión</strong> en el pin de recepción (<span class="arithmatex">\(RX\)</span>) para proteger el módulo frente a las señales de <span class="arithmatex">\(5\text{V}\)</span> del microcontrolador.</p>
+<div class="arithmatex">\[V_{RX} = V_{TX} \times \frac{R_2}{R_1 + R_2} = 5\text{V} \times \frac{2.2\text{ k}\Omega}{1\text{ k}\Omega + 2.2\text{ k}\Omega} \approx 3.43\text{V}\]</div>
 <h3 id="esquema-de-conexion">Esquema de Conexión</h3>
 <p><img alt="Esquema de conexión Bluetooth HC-05" src="../img_practica_5/bluetooth_esquema.png" /></p>
 <p><em>Figura 1: Circuito de interfaz Bluetooth con acondicionamiento de señal en el pin RX.</em></p>
@@ -1003,8 +1003,8 @@ void loop() {
     <strong>Causa:</strong> La aplicación del celular transmite un salto de línea adicional (<code>\r\n</code>) al presionar enviar, haciendo que la cadena no coincida exactamente con <code>"ON"</code>.<br />
 <strong>Solución:</strong> Asegúrate de incluir <code>mensaje.trim()</code> antes de la instrucción de comparación <code>if</code>, o configura tu app móvil para que no envíe terminadores de línea (<em>New Line</em>).</p>
 <p>??? warning "El emparejamiento se desconecta constantemente"
-    <strong>Causa:</strong> Caídas de voltaje por fuente de alimentación inestable o interferencias en el pin $TX$/$RX$.<br />
-<strong>Solución:</strong> Verifica la solidez de las tierras ($GND$) compartidas y asegura que la señal en el pin $RX$ esté regulada con el divisor de tensión.</p>
+    <strong>Causa:</strong> Caídas de voltaje por fuente de alimentación inestable o interferencias en el pin <span class="arithmatex">\(TX\)</span>/<span class="arithmatex">\(RX\)</span>.<br />
+<strong>Solución:</strong> Verifica la solidez de las tierras (<span class="arithmatex">\(GND\)</span>) compartidas y asegura que la señal en el pin <span class="arithmatex">\(RX\)</span> esté regulada con el divisor de tensión.</p>
 <hr />
 <h2 id="siguiente-paso">Siguiente Paso</h2>
 <p>Una vez validado el protocolo de comandos inalámbricos básicos (<code>ON</code>/<code>OFF</code>), pasamos a la aplicación en sistemas dinámicos:</p>
@@ -1064,6 +1064,12 @@ void loop() {
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
