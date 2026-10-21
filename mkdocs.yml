@@ -1,25 +1,15 @@
-site_name: Introducción a la Mecatrónica
+site_name: Proyecto de Ingeniería
+site_url: https://2511-05.github.io/Proyecto_de_Ingenieria/
 
 theme:
   name: material
-
-# --- AGREGA ESTAS LÍNEAS DESDE AQUÍ ---
-markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-
-extra_javascript:
-  - javascripts/mathjax.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-# --------------------------------------
-
-nav:
-  - Inicio: index.md
-  - Prácticas:
-      - Práctica 1: Practicas/Practica1.md
-      - Práctica 2: Practicas/Practica2.md
-      - Práctica 3: Practicas/Practica3.md
-      - Práctica 4: Practicas/Practica4.md
-      - Práctica 5: Practicas/Practica5.md
-      - Práctica 6: Practicas/Practica6.md
+  palette:
+    # Paleta y color primario / acento
+    primary: purple      # Opciones: teal, indigo, blue, deep purple, purple, cyan, green, deep orange, red, pink, blue grey
+    accent: deep purple
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
