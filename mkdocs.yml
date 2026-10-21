@@ -1,15 +1,8 @@
-site_name: Proyecto de Ingeniería
-site_url: https://2511-05.github.io/Proyecto_de_Ingenieria/
+site_name: Introducción a la Mecatrónica
+site_url: https://2511-05.github.io/Introducci-n-a-la-Mecatr-nica/
 
 theme:
   name: material
   palette:
-    # Paleta y color primario / acento
-    primary: purple      # Opciones: teal, indigo, blue, deep purple, purple, cyan, green, deep orange, red, pink, blue grey
-    accent: deep purple
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.top
-    - search.suggest
-    - search.highlight
+    primary: teal
+    accent: teal
