@@ -162,7 +162,8 @@ void loop() {
         }
     }
 }
----
+
+```
 
 ## 7. Resultado Final y Demostración
 
