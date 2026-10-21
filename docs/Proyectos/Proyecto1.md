@@ -164,64 +164,33 @@ void loop() {
 }
 ---
 
-
-
 ## 7. Resultado Final y Demostración
-
-
 
 ### Fotografía del Carrito Terminado
 
-
-
 ![Resultado Final del Carrito](../img_proyecto_1/resultado_final.jpg)
-
-
 
 *Figura 3: Ensamble final del carrito móvil sobre el chasis v2 definitivo.*
 
-
-
 ### Video de Demostración
 
-
-
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/TU_ID_DE_YOUTUBE" title="Demostración Proyecto 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-
-
+<iframe width="100%" height="400" src="[https://www.youtube.com/embed/TU_ID_DE_YOUTUBE](https://www.youtube.com/embed/TU_ID_DE_YOUTUBE)" title="Demostración Proyecto 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
-
-
 
 ## 8. Lista de Requisitos Cumplidos
 
-
-
 | Requisito Solicitado | Estado | Observación / Solución Aplicada |
-
 | :--- | :---: | :--- |
-
-| **Ajuste de Dimensiones** | ✔️ Cumplido | Rediseño exitoso en la Semana 2 mediante el chasis v2, adaptando la batería verticalmente para no sobrepasar los límites. |
-
-| **Fijación Mecánica Firme** | ✔️ Cumplido | Corrección del acople entre las ruedas y los motoreductores, evitando que se desprendan durante la marcha. |
-
-| **Alimentación Autónoma** | ✔️ Cumplido | Operación inalámbrica y continua mediante la batería portátil (Power Bank) integrada en la estructura. |
-
-| **Control Inalámbrico** | ✔️ Cumplido | Procesamiento correcto de comandos `ON`/`OFF` y movimientos recibidos por comunicación Bluetooth en la ESP32. |
-
-
+| **Ajuste de Dimensiones** | ✔️ Cumplido | Fabricación de un nuevo chasis más sencillo con las dimensiones exactas solicitadas. |
+| **Fijación Mecánica Firme** | ✔️ Cumplido | Uso de pegamento más resistente en el acople de las llantas para evitar desprendimientos. |
+| **Alimentación Autónoma** | ✔️ Cumplido | Operación inalámbrica y continua mediante la batería portátil integrada en la estructura. |
+| **Control Inalámbrico** | ✔️ Cumplido | Procesamiento correcto de comandos por Bluetooth con el módulo HC-06 y control con el driver TB6612FNG. |
 
 ---
 
-
-
 ## 9. Aprendizajes del Proyecto
 
-
-
-**Consideración de Volúmenes Reales en CAD:** Aprendimos a contemplar las dimensiones físicas absolutas de todos los periféricos (cables, conectores, llantas y batería) desde el primer boceto para evitar tener que rehacer el chasis por completo.
-**Acondicionamiento Mecánico y Tolerancias:** Comprobamos la importancia de asegurar un acople firme entre las ruedas y la flecha de los motoreductores para resistir las vibraciones del movimiento continuo.
-**Iteración de Prototipado:** Experimentamos el proceso real de desarrollo mecatrónico, donde las fallas detectadas en el primer prototipo sirvieron como base para lograr una versión v2 completamente funcional.
+1. **Diseño Estructural Simplificado:** Aprendimos que realizar un chasis con geometría más sencilla facilita el cumplimiento estricto de las dimensiones límite sin comprometer la capacidad de alojamiento de los componentes electrónicos.
+2. **Fijación Mecánica y Adhesión:** Comprobamos la importancia de emplear un pegamento más resistente en las uniones críticas (como la flecha del motor con la llanta) para soportar las fuerzas de tracción y torque.
+3. **Control Mecatrónico Integral:** Experimentamos la integración completa del driver TB6612FNG y la comunicación inalámbrica Bluetooth, coordinando la etapa de control y potencia de forma efectiva.
