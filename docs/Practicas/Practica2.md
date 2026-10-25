@@ -1,49 +1,88 @@
-# Sesión 2 — Control de velocidad de un motor DC mediante PWM con ESP32
+# Sesión — Entrada, Salida y Antirrebote con ESP32
 
 ## Objetivos
-* Configurar los canales de salida PWM (LEDC) en un microcontrolador ESP32 
-* Variar el duty cycle mediante un potenciómetro conectado a una entrada analógica (ADC) 
-* Controlar la velocidad de un motor DC a través de un transistor y diodo flyback 
+- Configurar pines digitales como entrada (con resistencia pull-up/pull-down) y salida en el microcontrolador ESP32.
+- Comprender el fenómeno físico del rebote mecánico en un botón o pulsador (bouncing).
+- Implementar una rutina de filtrado antirrebote por software para obtener lecturas estables en el sistema.
 
 ## Materiales
-* (1×) Módulo ESP32 (NodeMCU 32S o similar)
-* (1×) Potenciómetro de 10 kΩ
-* (1×) Transistor NPN (TIP122, BD139 o 2N2222) + resistor de base (1 kΩ)
-* (1×) Diodo 1N4007 (flyback para protección del transistor)
-* (1×) Motor DC (5 V a 9 V)
-* (1×) Fuente de alimentación externa para el motor
-* Protoboard, cables de conexión
+- (1×) Módulo ESP32 (NodeMCU 32S o similar)
+- (1×) Pulsador (Botón táctil)
+- (1×) Resistencia de 10 kΩ (en caso de no utilizar la resistencia pull-up interna del ESP32)
+- (1×) LED indicador
+- (1×) Resistencia de 220 Ω (para el LED)
+- Protoboard y cables de conexión
 
 ## Desarrollo
 
-<img src="../img_practica_2/boton_rebote_esquema_p2.png" alt="Simulación del circuito en Wokwi o Tinkercad." width="50%">  
-*Simulación del circuito del ESP32.*
-
-[*Video de demostración del control de velocidad*](../img_practica_2/video-esp32-pwm.mp4)
-
-**Explicación:** El ESP32 lee el valor analógico del potenciómetro (de 0 a 4095) a través de uno de sus pines ADC (ej. GPIO 34). Posteriormente, escala dicho valor a la resolución configurada del canal PWM (0 a 255 para 8 bits) y envía la señal por un pin de salida (ej. GPIO 18) hacia la base del transistor, ajustando la velocidad del motor.
+**Explicación del fenómeno de rebote:** Cuando se presiona un botón mecánico, los contactos metálicos internos chocan y vibran microscópicamente durante unos milisegundos antes de asentarse. Esto provoca que el ESP32 detecte múltiples pulsos falsos (altos y bajos rápidos) en lugar de una sola pulsación limpia. Para solucionar esto, implementamos un control por software basado en tiempo (`millis()`) que filtra estas fluctuaciones.
 
 ### Código fuente (Arduino IDE)
-```cpp
-const int potPin = 34;   // Pin analógico conectado al potenciómetro
-const int pwmPin = 18;   // Pin GPIO de salida PWM
 
-// Configuración PWM del ESP32
-const int freq = 5000;      // Frecuencia en Hz
-const int pwmChannel = 0;   // Canal PWM (0 a 15)
-const int resolution = 8;   // Resolución de 8 bits (0 - 255)
+```cpp
+const int botonPin = 15;    // Pin digital conectado al botón (Entrada)
+const int ledPin = 2;       // Pin digital conectado al LED (Salida)
+
+// Variables para el control del estado y el antirrebote
+int estadoLed = LOW;         // Estado actual del LED
+int estadoPulsador;          // Lectura actual del pin del botón
+int ultimoEstadoPulsador = HIGH; // Lectura anterior del botón (asumiendo Pull-Up)
+
+unsigned long ultimoTiempoDebounce = 0;  // Último momento en que el botón cambió de estado
+unsigned long delayDebounce = 50;        // Tiempo de retardo para el antirrebote (en milisegundos)
 
 void setup() {
-  // Configurar las propiedades del canal PWM
-  ledcSetup(pwmChannel, freq, resolution);
-  // Asignar el canal al pin GPIO
-  ledcAttachPin(pwmPin, pwmChannel);
+  pinMode(ledPin, OUTPUT);
+  pinMode(botonPin, INPUT_PULLUP); // Activamos resistencia pull-up interna
+  digitalWrite(ledPin, estadoLed);
 }
 
 void loop() {
-  int potValue = analogRead(potPin);                     // Leer valor (0 - 4095)
-  int dutyCycle = map(potValue, 0, 4095, 0, 255);        // Escalar a 8 bits (0 - 255)
-  
-  ledcWrite(pwmChannel, dutyCycle);                      // Enviar señal PWM
-  delay(15);
+  int lectura = digitalRead(botonPin);
+
+  // Si el estado del botón cambió debido a ruido o presión:
+  if (lectura != ultimoEstadoPulsador) {
+    ultimoTiempoDebounce = millis(); // Reiniciamos el temporizador de rebote
+  }
+
+  // Si ha pasado el tiempo suficiente, tomamos la lectura como válida
+  if ((millis() - ultimoTiempoDebounce) > delayDebounce) {
+    
+    // Si el estado del botón realmente cambió:
+    if (lectura != estadoPulsador) {
+      estadoPulsador = lectura;
+
+      // Si el botón está presionado (LOW en INPUT_PULLUP), cambiamos el estado del LED
+      if (estadoPulsador == LOW) {
+        estadoLed = !estadoLed;
+        digitalWrite(ledPin, estadoLed);
+      }
+    }
+  }
+
+  ultimoEstadoPulsador = lectura;
 }
+
+```
+## Imágenes y esquemáticos
+### 1. BLINK
+![BLINK](../pic/blink.png)   
+*Programa 1: BLINK realizado en Wokwi.*
+### 2. BLINK con botón
+![BLINK con botón](../pic/blinkboton.png)   
+*Programa 2: BLINK con botón realizado en Wokwi*
+### 3. TOGGLE con antirrebote
+![TOGGLE con antirrebote](../pic/toggle.png)   
+*Programa 3: TOGGLE con antirrebote realizado en Wokwi.*
+
+## Fallas y Soluciones
+
+- **Síntoma:** Al intentar subir el código a la ESP32, aparecía un error indicando que el puerto estaba ocupado o no existía. El cable USB actuaba simplemente como un cargador, pero no transmitía datos.
+- **Cómo lo encontré:** Revisamos el Administrador de Dispositivos en la computadora dentro de la sección de puertos COM y LPT. Notamos que no detectaba ninguna placa conectada por USB y únicamente aparecían los puertos del Bluetooth.
+- **Solución:** Identificamos el chip de la tarjeta ESP32 el cual es el CP2102 e instalamos su driver correspondiente en la laptop. Tras la instalación, la computadora reconoció el puerto bajo el nombre *Silicon Labs CP210x USB to UART Bridge*, logrando así que los datos se transmitieran correctamente a la tarjeta.
+
+## Aprendizajes
+En esta práctica aprendimos la importancia de configurar correctamente los controladores de comunicación entre la computadora y la tarjeta ESP32 antes de intentar subir cualquier código. También comprendimos cómo funciona la lógica de programación para salidas digitales, cómo manejar entradas con el modo `INPUT_PULLUP` y cómo solucionar los problemas de rebote en botones tanto por hardware como por software.
+
+## Siguiente paso
+Para las siguientes prácticas buscamos aprender más sobre programación para poder hacer sistemas un poco más complejos, entender bien su funcionamiento y lograr armarlos correctamente antes de ponerlos en práctica.
