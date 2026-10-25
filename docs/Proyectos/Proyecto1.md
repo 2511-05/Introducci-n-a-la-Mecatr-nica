@@ -60,13 +60,13 @@ Para la validación y evaluación del vehículo se definieron los siguientes cri
 
 ### Boceto y Modelo 3D
 
-![Boceto del Chasis](../img_proyecto_1/boceto_chasis.png)
+![Boceto del Chasis](../pic/primerideachasis.jpg) 
 
-*Figura 1: Boceto conceptual del chasis y distribución espacial de la electrónica.*
+*Figura 1: Primera referencia del chasis y distribución espacial de la electrónica.*
 
-![Modelo 3D del Chasis Final](../img_proyecto_1/modelo_3d.png)
+![Modelo 3D del Chasis Final](../pic/resultadochasis.jpg) 
 
-*Figura 2: Modelado CAD 3D del prototipo final (Chasis v2).*
+*Figura 2: Impresión del prototipo final (Chasis v2).*
 
 ---
 
@@ -169,13 +169,13 @@ void loop() {
 
 ### Fotografía del Carrito Terminado
 
-![Resultado Final del Carrito](../img_proyecto_1/resultado_final.jpg)
+![Proceso ensamblaje](../pic//ensamblajecarrito.png) 
 
-*Figura 3: Ensamble final del carrito móvil sobre el chasis v2 definitivo.*
+*Figura 3: Proceso de ensamblaje.*
 
-### Video de Demostración
+![Resultado Final del Carrito](../pic/resultadocarrito.png) 
 
-<iframe width="100%" height="400" src="[https://www.youtube.com/embed/TU_ID_DE_YOUTUBE](https://www.youtube.com/embed/TU_ID_DE_YOUTUBE)" title="Demostración Proyecto 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+*Figura 4: Ensamble final del carrito móvil sobre el chasis v2 definitivo.*
 
 ---
 
