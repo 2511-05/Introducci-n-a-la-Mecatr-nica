@@ -13,8 +13,8 @@
 El potenciómetro actúa como un divisor de tensión ajustable manualmente. Al girar su perilla, se modifica la proporción de resistencia entre el terminal central (wiper) y los extremos conectados a $V_{CC}$ (5V) y $GND$. Esto produce un voltaje de salida analógico continuo que varía proporcionalmente entre $0\text{ V}$ y $5\text{ V}$.
 
 ### Esquema y Simulación
-![Circuito y Simulación del Potenciómetro](../img_practica_4/potenciometro_esquema.png)
 
+![Potenciometro](../pic/potenciometro.jpg)   
 *Figura 1: Diagrama de conexión y simulación del potenciómetro conectado a una entrada analógica.*
 
 ### Código de Implementación
@@ -52,6 +52,7 @@ La fotorresistencia (LDR) varía su resistencia eléctrica en función de la int
 
 ### Esquema y Simulación
 
+![LDR](../pic/ldr.jpg)   
 *Figura 2: Configuración en divisor de voltaje para el sensor de luz LDR.*
 
 ### Código de Implementación
@@ -87,6 +88,7 @@ $$\text{Distancia (cm)} = \frac{t \times 0.0343}{2}$$
 
 ### Esquema y Simulación
 
+![Sensor ultrasónico](../pic/ultrasonico.jpg)   
 *Figura 3: Conexión de los pines de disparo (Trig) y eco (Echo) del sensor ultrasónico.*
 
 ### Código de Implementación
