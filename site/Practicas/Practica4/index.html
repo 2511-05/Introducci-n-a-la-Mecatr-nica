@@ -978,8 +978,8 @@
 <h3 id="principio-de-funcionamiento">Principio de Funcionamiento</h3>
 <p>El potenciómetro actúa como un divisor de tensión ajustable manualmente. Al girar su perilla, se modifica la proporción de resistencia entre el terminal central (wiper) y los extremos conectados a <span class="arithmatex">\(V_{CC}\)</span> (5V) y <span class="arithmatex">\(GND\)</span>. Esto produce un voltaje de salida analógico continuo que varía proporcionalmente entre <span class="arithmatex">\(0\text{ V}\)</span> y <span class="arithmatex">\(5\text{ V}\)</span>.</p>
 <h3 id="esquema-y-simulacion">Esquema y Simulación</h3>
-<p><img alt="Circuito y Simulación del Potenciómetro" src="../img_practica_4/potenciometro_esquema.png" /></p>
-<p><em>Figura 1: Diagrama de conexión y simulación del potenciómetro conectado a una entrada analógica.</em></p>
+<p><img alt="Potenciometro" src="../../pic/potenciometro.jpg" /> <br />
+<em>Figura 1: Diagrama de conexión y simulación del potenciómetro conectado a una entrada analógica.</em></p>
 <h3 id="codigo-de-implementacion">Código de Implementación</h3>
 <pre><code class="language-cpp">const int potPin = A0;
 int valorADC = 0;
@@ -1008,7 +1008,8 @@ void loop() {
 <h3 id="principio-de-funcionamiento_1">Principio de Funcionamiento</h3>
 <p>La fotorresistencia (LDR) varía su resistencia eléctrica en función de la intensidad de luz incidente: a mayor iluminación, menor resistencia. Para convertir esta variación de resistencia en un voltaje medible por el ADC, se configura un circuito divisor de tensión con una resistencia fija de pull-down (<span class="arithmatex">\(10\text{ k}\Omega\)</span>).</p>
 <h3 id="esquema-y-simulacion_1">Esquema y Simulación</h3>
-<p><em>Figura 2: Configuración en divisor de voltaje para el sensor de luz LDR.</em></p>
+<p><img alt="LDR" src="../../pic/ldr.jpg" /> <br />
+<em>Figura 2: Configuración en divisor de voltaje para el sensor de luz LDR.</em></p>
 <h3 id="codigo-de-implementacion_1">Código de Implementación</h3>
 <pre><code class="language-cpp">const int ldrPin = A1;
 int valorLDR = 0;
@@ -1033,7 +1034,8 @@ void loop() {
 <p>El HC-SR04 mide distancias emitiendo ráfagas de ultrasonido a <span class="arithmatex">\(40\text{ kHz}\)</span> mediante el pin <code>Trig</code>. Al rebotar en un objeto, el eco regresa y es detectado por el sensor, manteniendo el pin <code>Echo</code> en nivel alto durante el tiempo transcurrido (<span class="arithmatex">\(t\)</span>). Conociendo la velocidad del sonido en el aire (<span class="arithmatex">\(\approx 343\text{ m/s}\)</span> o <span class="arithmatex">\(0.0343\text{ cm/}\mu\text{s}\)</span>), se calcula la distancia mediante la fórmula:</p>
 <div class="arithmatex">\[\text{Distancia (cm)} = \frac{t \times 0.0343}{2}\]</div>
 <h3 id="esquema-y-simulacion_2">Esquema y Simulación</h3>
-<p><em>Figura 3: Conexión de los pines de disparo (Trig) y eco (Echo) del sensor ultrasónico.</em></p>
+<p><img alt="Sensor ultrasónico" src="../../pic/ultrasonico.jpg" /> <br />
+<em>Figura 3: Conexión de los pines de disparo (Trig) y eco (Echo) del sensor ultrasónico.</em></p>
 <h3 id="codigo-de-implementacion_2">Código de Implementación</h3>
 <pre><code class="language-cpp">const int trigPin = 9;
 const int echoPin = 8;

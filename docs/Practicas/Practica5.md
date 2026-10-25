@@ -43,9 +43,9 @@ El módulo Bluetooth se comunica con el microcontrolador mediante puertos **UART
 $$V_{RX} = V_{TX} \times \frac{R_2}{R_1 + R_2} = 5\text{V} \times \frac{2.2\text{ k}\Omega}{1\text{ k}\Omega + 2.2\text{ k}\Omega} \approx 3.43\text{V}$$
 
 ### Esquema de Conexión
-![Esquema de conexión Bluetooth HC-05](../img_practica_5/bluetooth_esquema.png)
 
-*Figura 1: Circuito de interfaz Bluetooth con acondicionamiento de señal en el pin RX.*
+![ESP32](../pic/esp32led.jpg)   
+*Figura 1: Circuito realizado en Wokwi.*
 
 ---
 
