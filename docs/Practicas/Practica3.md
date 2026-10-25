@@ -16,10 +16,15 @@
 
 ## Desarrollo
 
-<img src="../img_practica_3/digital3.jpg" alt="Simulación del circuito en Tinkercad." width="50%">  
-*Simulación del circuito en Tinkercad.*
+![Esquemático](../pic/tinkercad555.png)   
+*Figura 1: Esquemático del circuito realizado en Tinkercad.*
+![Código 1](../pic/codigo1.png)   
+*Figura 2: Primera parte del código.*
+![Código 2](../pic/codigo2.png)   
+*Figura 3: Segunda parte del código.*
+![Código 3](../pic/codigo3.png)   
+*Figura 4: Tercera parte del código.*
 
-[*Video demostración del cambio de giro y velocidad*](../img_practica_3/video-puente-h.mp4)
 
 **Explicación:** El puente H permite cambiar la polaridad aplicada a las terminales del motor. Al activar la primera combinación de entradas, la corriente fluye en una dirección (giro a la derecha); al cambiar la combinación, la corriente fluye en sentido opuesto (giro a la izquierda). La señal PWM proveniente del 555 se conecta al pin *Enable* para controlar simultáneamente la velocidad.
 
@@ -30,6 +35,10 @@
 | Alto (5V) | Bajo (0V) | 50% Duty | Giro a la derecha (velocidad media) |
 | Bajo (0V) | Bajo (0V) | Cualquier valor | Detenido (freno pasivo) |
 | Alto (5V) | Alto (5V) | Cualquier valor | Detenido (freno activo) |
+
+### Segundo circuito
+![Servomotores](../pic/controlservo.png)   
+*Figura 5: Control de Servomotores.*
 
 ## Fallas
 * **Síntoma:** El integrado L293D se calentaba demasiado o el motor no giraba en una de las direcciones.

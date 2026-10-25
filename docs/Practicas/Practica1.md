@@ -20,7 +20,7 @@
 ## Desarrollo
 
 ![555](../pic/tinkercad555.png)   
-*Figura 1: Simulación realizada en Tinkerkad.*
+*Figura 1: Simulación realizada en Tinkercad.*
 
 
 **Explicación:** El circuito integrado 555 se encarga de controlar el tiempo, mientras que las resistencias y el capacitor definen qué tan rápido se carga y descarga la energía. Esto hace que la salida alterne continuamente entre encendido y apagado, logrando que el LED parpadee.
