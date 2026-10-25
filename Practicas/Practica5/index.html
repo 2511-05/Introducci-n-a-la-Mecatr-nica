@@ -915,8 +915,8 @@
 <p>El módulo Bluetooth se comunica con el microcontrolador mediante puertos <strong>UART</strong> (<span class="arithmatex">\(TX\)</span>/<span class="arithmatex">\(RX\)</span>). Dado que los pines de datos del módulo operan a <span class="arithmatex">\(3.3\text{V}\)</span>, se instala un <strong>divisor de tensión</strong> en el pin de recepción (<span class="arithmatex">\(RX\)</span>) para proteger el módulo frente a las señales de <span class="arithmatex">\(5\text{V}\)</span> del microcontrolador.</p>
 <div class="arithmatex">\[V_{RX} = V_{TX} \times \frac{R_2}{R_1 + R_2} = 5\text{V} \times \frac{2.2\text{ k}\Omega}{1\text{ k}\Omega + 2.2\text{ k}\Omega} \approx 3.43\text{V}\]</div>
 <h3 id="esquema-de-conexion">Esquema de Conexión</h3>
-<p><img alt="Esquema de conexión Bluetooth HC-05" src="../img_practica_5/bluetooth_esquema.png" /></p>
-<p><em>Figura 1: Circuito de interfaz Bluetooth con acondicionamiento de señal en el pin RX.</em></p>
+<p><img alt="ESP32" src="../../pic/esp32led.jpg" /> <br />
+<em>Figura 1: Circuito realizado en Wokwi.</em></p>
 <hr />
 <h2 id="2-codigo-de-implementacion">2. Código de Implementación</h2>
 <p>!!! tip "Uso del método .trim()"
